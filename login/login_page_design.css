@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Martel+Sans:wght@400;700&display=swap');
+
+form {
+  display: grid;
+
+  font-family: 'Martel Sans', sans-serif;
+
+  grid-template-columns: repeat(3, auto);
+  grid-template-rows: repeat(5, auto) 10em auto;
+  gap: 1em;
+
+  width: 50em;
+  margin: 1em auto;
+
+  --label-optional: #333;
+  --label-required: #DC2626;
+
+  --field-color: #ECFCCB;
+  --field-focus: #D9F99D;
+  --field-border: #84CC16;
+
+  --error-color: #FECACA;
+  --error-border: #F87171;
+
+  --button-bgcolor: #84CC16;
+}
+
+label {
+  display: grid;
+  grid-template-rows: auto 1fr;
+  font-size: 0.8em;
+  line-height: 1em;
+  font-weight: bold;
+}
+
+#username { grid-column: 1; grid-row: 1; }
+
+#email    { grid-column: 1; grid-row: 2; }
+
+#password { grid-column: 1; grid-row: 3;}
+
+#register { grid-column: 1; grid-row: 4;}
+
+label {
+  color: var(--label-optional);
+}
+
+label.required {
+  color: var(--label-required);
+}
+
+button, input, select, textarea {
+  padding: 1em;
+
+  border-radius: 4px;
+  border: 1px solid var(--field-border);
+
+  background-color: var(--field-color);
+}
+
+button {
+  padding: 1em;
+  background-color: var(--button-bgcolor);
+  color: #fff;
+  font-weight: bold;
+  font-family: 'Martel Sans', sans-serif;
+}
+
+input:invalid, select:invalid, textarea:invalid {
+  background-color: var(--error-color);
+  border: 1px solid var(--error-border);
+}
+
+input:focus, select:focus, textarea:focus {
+  background-color: var(--field-focus);
+  border: 1px solid var(--field-border);
+  outline: none;
+}
+@media (max-width: 52em) {
+    form {
+      margin: 1em;
+      width: auto;
+  
+      grid-template-columns: auto;
+      grid-template-rows: repeat(9, auto) 10em auto;
+    }
+  
+  
+    #username { grid-column: 1; grid-row: 1; }
+    #password   { grid-column: 1; grid-row: 3; }
+  
+    #email    { grid-column: 1; grid-row: 2; }
+  
+    #register { grid-column: 1; grid-row: 4;}
+  }
