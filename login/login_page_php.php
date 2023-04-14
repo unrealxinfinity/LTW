@@ -1,6 +1,6 @@
 <?php
 
-  $username = $_GET['username']; //gets the username that acts as an id
+  $username = $_POST['username']; //gets the username that acts as an id
 
   $db = new PDO('sqlite:database/user_db.db'); //put database on variable db
 
