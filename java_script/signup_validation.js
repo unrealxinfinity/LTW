@@ -1,6 +1,8 @@
 
-let username = document.querySelector('form input[name="username"]');
+let username = document.querySelector("form input[name=username]");
 if (username) username.addEventListener("input", validateUsername, false);
+console.log("USERNAME ELEM", username);
+
 
 let password = document.querySelector("form input[name=password]");
 if (password) password.addEventListener("input", validatePassword, false);
@@ -11,7 +13,11 @@ if (register){
 }
 
 function validateUsername() {
-    if (!/^[0-9a-zA-Z]{6,}$/.test(this.value)) this.classList.add("invalid");
+      console.log("USERNAME");
+      if (!/^[0-9a-zA-Z]{6,}$/.test(this.value)) {
+      console.log("USERNAME ENTERED");
+      this.classList.add("invalid");
+    }
     else this.classList.remove("invalid");
   }
   

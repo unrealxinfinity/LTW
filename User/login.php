@@ -24,4 +24,7 @@
             </p>
             <a href="../Boot/signup.php" class="register_link">Sign Up</a>
         </div>
+    </div>
+</body>
+</html>
     

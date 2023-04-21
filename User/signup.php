@@ -24,4 +24,9 @@
             <p> <?php if(isset($_SESSION['ERROR'])) echo htmlentities($_SESSION['ERROR']); unset($_SESSION['ERROR'])?> </p>
             <a href="../Boot/login.php" class="register_button">Login</a>
         </div>
+    </div>
+    <script src="../java_script/signup_validation.js"></script>
+</body>
+</html>
+    
 
