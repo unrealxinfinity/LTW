@@ -1,0 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Imperial+Script&family=Raleway:wght@200&family=Roboto:wght@100&display=swap');
+:root{
+    --main_color:rgb(255, 191, 0);
+}
+*{
+    font-family: "Raleway", sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    border: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+*::selection{
+    background: var(--main_color);
+    color: #333;
+}
+html{
+    font-size: 62.5%;
+    overflow-x: hidden;
+}
+html::-webkit-scrollbar-track{
+    background: #222;
+}
+html::-webkit-scrollbar-thumb{
+    background: var(--main_color);
+}
+.profile{
+    position: fixed;
+    top: 0;
+    left: -25%;
+    z-index: 1000;
+    height: 100%;
+    width: 35rem;
+    background: #1a1a1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-flow: column;
+    text-align: center;
+    transition: transform .5s;
+}
+.profile .user .name{
+    font-size: 3.5rem;
+    color:#fff;
+}
+.profile .user .post{
+    font-size: 2rem;
+    color: #eeee;
+}
+.profile .user .info{
+    font-size: 1.5rem;
+    color: #dfdedeee;
+    text-transform: none;
+}
+.profile .navbar{
+    width: 100%;
+}
+.profile .navbar ul{
+    list-style: none;
+    padding: 1rem 3rem;
+}
+.profile .navbar ul li a{
+    display: block;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    background: #333;
+    color: #fff;
+    font-size: 2rem;
+    border-radius: 5rem;
+}
+.profile .navbar ul li a:hover{
+    background: var(--main_color);
+}
+body #menu{
+    display: block;
+    position: fixed;
+    right: 4rem;
+    top: 4rem;
+    z-index: 1000;
+    display: none;
+}
+.bar{
+    position: fixed;
+    top: 1.75rem;
+    right: 2rem;
+    background-color: var(--main_color);
+    color: #fff;
+    cursor: pointer;
+    font-size: 2.5rem;
+    padding: 1rem 1.5rem;
+    z-index: 999;
+}
+.bar::before{
+    content: "\2630";
+}
+#menu:checked + .bar::before{
+    content:"\2715";
+}
+#menu:checked ~ .profile{
+    transform: translateX(37rem);
+}
+
+
+@media (max-width:1200px){
+    html{
+        font-size: 55%;
+    }
+}
+@media (max-width: 991px){
+    .profile{
+        left: -0%;
+    }
+    #menu{
+        display: block;
+    }
+}
