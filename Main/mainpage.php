@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href = "../css/mainpage.css">
+    <script defer src = "../java_script/edit_profile_validation.js"></script>
+    <title>Main Page</title>
+</head>
+<body>
+    <input type="checkbox" id="menu"> 
+    <label class="bar" for="menu"></label>
+    <header>
+        <div class = "profile">
+            <h2><?php echo htmlentities($_SESSION['username']); ?></h2>
+            <p><?php echo htmlentities($_SESSION['name']); ?></p>
+            <p><?php echo htmlentities($_SESSION['email']); ?></p>
+        </div>
+        <nav>
+            <ul>
+                <li><a href = "#profile" class = "active">Home</a></li>
+                <li><a href = "#info">Account</a></li>
+                <li><a href = "#send">Submit</a></li>
+                <li><a href = "#">View</a></li>
+                
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="profile" class = "padding">
+            <div class = "profile_intro">
+                <h1><?php echo htmlentities($_SESSION['username']); ?></h1>
+                <p><?php echo htmlentities($_SESSION['role']); ?></p>
+
+            </div>
+        </section>
+        
+        <section id = "info" class = "padding">
+            <p class = "sub_title">Account</p>
+            <h2 class = "title">Edit Profile</h2>
+            <div class = "account_info">
+                <div class = "edit_info">
+                    <form action="../Submition/edit_profile.php" method="post" class="register_form" id = "register_form">
+                        <div class = "control">
+                            <label for = "username"></label>
+                            <input name="username" id = "username" type="text" placeholder="Username">
+                            <div class = "error"></div>
+                        </div>
+                        <div class = "control">
+                            <label for = "name"></label>
+                            <input name="name" id = "name" type="text" placeholder="Name">
+                            <div class = "error"></div>
+                        </div>
+                        <div class = "control">
+                            <label for = "email"></label>
+                            <input name="email" id = "email" type="text" placeholder="E-mail">
+                            <div class = "error"></div>
+                        </div>
+                        <div class = "control">
+                            <label for = "password"></label>
+                            <input name="password" id = "password" type="password" placeholder="Password">
+                            <div class = "error"></div>
+                        </div>
+                        <div class = "control">
+                            <input type="submit" name="Submit" value="Change">
+                        </div>
+                    </form>
+                </div>
+                <div class = "curr_info">
+                        <ul>
+                            <li><a href = "../Boot/login.php" class = "btn">Logout</a></li>
+                            <li><a href = "../Submition/delete_user.php" class = "btn">Delete</a></li>
+                        </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id = "send" class = "padding">
+            <p class = "sub_title">submit</p>
+            <h2 class = "title">Send Ticket</h2>
+            <div class = "ticket_container">
+                <form action = "../Submition/send_ticket.php" method = "post">
+                    <div class = "ticket_control">
+                        <label for = "department">Department</label>
+                        <select name = "department" class = "department_selector">
+                            <option value = "No department"></option>
+                            <option value = "Accounting">Accounting</option>
+                            <option value = "Sales">Sales</option>
+                        </select>
+                    </div>
+                    <div class = "ticket_control">
+                        <label for = "msg">Message</label>
+                        <textarea name = "msg" id = "msg" rows = "6" placeholder = "Message" requred></textarea>
+                    </div>
+                    <div class = "ticket_control">
+                        <input type = "submit" value = "Send">
+                    </div>
+                </form>
+            </div>
+        </section>
+
+                    
+    </main>
+
+    <script src = "../java_script/main_page.js"></script>
+</body>
+</html>

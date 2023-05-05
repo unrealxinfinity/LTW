@@ -3,6 +3,7 @@ include_once("../database/startup.php");
 include_once("../database/user.php");
 if(($username = isLoginCorrect($_POST['username'], $_POST['password'])) != -1){
 	setCurrentUser($username);
+	$_SESSION['role'] = "Client";
 	header("Location:../Boot/main_page.php");
 
 } else {

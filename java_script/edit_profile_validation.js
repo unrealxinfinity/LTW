@@ -53,20 +53,20 @@ const validate = () => {
   const email_input = email.value.trim();
   const passoword_input = password.value.trim(); 
 
-  if(username_input === '')set_error(username, 'Username is required');
+  if(username_input === ''){}
   else if(!is_valid_username(username_input)) set_error(username, 'Invalid Username');
   else set_success(username);
 
 
-  if(name_input === '')set_error(name, 'Name is required');
+  if(name_input === ''){}
   else if(!is_valid_name(name_input))set_error(name, 'Invalid Name');
   else set_success(name);
 
-  if(email_input === '')set_error(email, 'Email is required');
+  if(email_input === ''){}
   else if(!is_valid_email(email_input))set_error(email, 'Provide a valid email adress');
   else set_success(email);
 
-  if(passoword_input === '')set_error(password, 'Password is required');
+  if(passoword_input === ''){}
   else if(passoword_input.length < 8)set_error(password, 'Password must be at least 8 characters');
   else set_success(password);
   console.log(flag);

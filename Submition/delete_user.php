@@ -5,6 +5,9 @@ if(($username = $_SESSION['username']) != null){
         if(deleteUser($_SESSION['username'])){
             unset($_SESSION['username']);
             unset($_SESSION['email']);
+            unset($_SESSION['password']);
+            unset($_SESSION['name']);
+            unset($_SESSION['role']);
             header("Location:../Boot/login.php");
     }
     else{

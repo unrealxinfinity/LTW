@@ -4,6 +4,8 @@
    function setCurrentUser($username) {
     	$_SESSION['username'] = $username['username'];
         $_SESSION['email'] = $username['email'];
+        $_SESSION['password'] = $username['password'];
+        $_SESSION['name'] = $username['name'];
    }
 
    function getUsername() {
