@@ -49,7 +49,8 @@ include_once("../database/user.php");
         $valid = true;
     }
     if($valid){
-        header("Location:../Boot/main_page.php");
+        if($_SESSION['role'] == "Agent")header("Location:../Boot/main_page_agent.php");
+        else header("Location:../Boot/main_page.php");
     }
 
  ?>

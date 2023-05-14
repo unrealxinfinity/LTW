@@ -39,8 +39,11 @@
   function createAgent($username){
     global $db;
     try {
-  	  $stmt = $db->prepare('INSERT INTO agents(agentName) VALUES (:username)');
-  	  $stmt->bindParam(':username', $username);
+      $stmt = $db->prepare('SELECT id FROM users WHERE username = ?');
+      $stmt->execute(array($username));
+      $id = $stmt->fetch();
+  	  $stmt = $db->prepare('INSERT INTO agents(agentID) VALUES (:id)');
+  	  $stmt->bindParam(':id', $id['id']);
       if($stmt->execute()){
         return 0;
       }
@@ -54,8 +57,11 @@
   function createAdmin($username){
     global $db;
     try {
-  	  $stmt = $db->prepare('INSERT INTO admins(adminName) VALUES (:username)');
-  	  $stmt->bindParam(':username', $username);
+  	  $stmt = $db->prepare('SELECT id FROM users WHERE username = ?');
+      $stmt->execute(array($username));
+      $id = $stmt->fetch();
+  	  $stmt = $db->prepare('INSERT INTO admins(adminID) VALUES (:id)');
+  	  $stmt->bindParam(':id', $id['id']);
       if($stmt->execute()){
         return 0;
       }
@@ -70,8 +76,49 @@
   function getUser($username) {
     global $db;
     try {
-      $stmt = $db->prepare('SELECT username, name, email, password FROM users WHERE username = ?');
+      $stmt = $db->prepare('SELECT id, username, name, email, password FROM users WHERE username = ?');
       $stmt->execute(array($username));
+      return $stmt->fetch();
+    
+    }catch(PDOException $e) {
+      return null;
+    }
+  }
+  function get_user_by_id($id) {
+    global $db;
+    try {
+      $stmt = $db->prepare('SELECT * FROM users WHERE id = ?');
+      $stmt->execute(array($id));
+      return $stmt->fetchAll();
+    
+    }catch(PDOException $e) {
+      return null;
+    }
+  }
+  function get_role($username){
+    global $db;
+    try {
+      $stmt = $db->prepare('SELECT id FROM users WHERE username = ?');
+      $stmt->execute(array($username));
+      $id = $stmt->fetch();
+      $stmt = $db->prepare('SELECT adminID FROM admins WHERE adminID = ?');
+      $stmt->execute(array($id['id']));
+      if($stmt->fetch() !== false){
+        $role = "Admin";
+        return $role;
+      }
+      else{
+        $stmt = $db->prepare('SELECT agentID FROM agents WHERE agentID = ?');
+        $stmt->execute(array($id['id']));
+        if($stmt->fetch() !== false){
+          $role = "Agent";
+          return $role;
+        }
+        else{
+          $role = "Client";
+          return $role;
+        }
+      }
       return $stmt->fetch();
     
     }catch(PDOException $e) {
@@ -128,5 +175,27 @@
     catch(PDOException $e) {
       return false;
     }
+  }
+  function get_agents(){
+    global $db;
+    try {
+      $stmt = $db->prepare('SELECT * FROM agents');
+      $stmt->execute();
+      return $stmt->fetchAll();
+    
+    }catch(PDOException $e) {
+      return null;
+    }
+  }
+  function get_agents_count(){
+    global $db;
+		try {
+			$stmt = $db->prepare('SELECT COUNT(*) AS res FROM agents');
+      $stmt->execute();
+			return $stmt->fetchAll();
+
+		}catch(PDOExecption $e) {
+			return null;
+		}
   }
 ?>

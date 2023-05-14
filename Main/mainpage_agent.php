@@ -21,8 +21,8 @@
             <ul>
                 <li><a href = "#profile" class = "active">Home</a></li>
                 <li><a href = "#info">Account</a></li>
-                <li><a href = "#send">Submit</a></li>
                 <li><a href = "#view">View</a></li>
+                <li><a href = "#browse">Browse</a></li>
                 
             </ul>
         </nav>
@@ -71,47 +71,79 @@
                 <div class = "curr_info">
                         <ul>
                             <li><a href = "../Boot/login.php" class = "btn">Logout</a></li>
+                            <li><a href = "../Submition/change_to_client.php" class = "btn">Change to client</a></li>
                         </ul>
                 </div>
             </div>
         </section>
 
-        <section id = "send" class = "padding">
-            <p class = "sub_title">submit</p>
-            <h2 class = "title">Send Ticket</h2>
-            <div class = "ticket_container">
-                <form action = "#" method = "post">
-                    <div class = "ticket_control">
-                        <label for = "department">Department</label>
-                        <select name = "department" class = "department_selector">
-                            <option value = ""></option>
-                            <option value = "Accounting">Accounting</option>
-                            <option value = "Sales">Sales</option>
-                        </select>
-                    </div>
-                    <div class = "ticket_control">
-                        <label for = "msg">Message</label>
-                        <textarea name = "msg" id = "msg" rows = "6" placeholder = "Message"></textarea>
-                    </div>
-                    <div class = "ticket_control">
-                        <input id = "send_ticket_button" type = "submit" value = "Send">
-                    </div>
-                </form>
+        <section id = "view" class = "padding">
+            <p class = "sub_title">view</p>
+            <h2 class = "title">Assigned Client Tickets</h2>
+            <input id = "show_assigned_tickets" type = "submit" value = "Hide">
+            <div class = "ticket_history">
+                <?php include_once("../Submition/get_all_assigned_tickets.php"); ?>
             </div>
         </section>
 
-        <section id = "view" class = "padding">
-            <p class = "sub_title">view</p>
-            <h2 class = "title">Ticket History</h2>
-            <input id = show_tickets type = "submit" value = "Hide">
-            <div class = "ticket_history">
-                <?php include_once("../Submition/get_ticket.php"); ?>
+        <section id = "browse" class = "padding">
+            <p class = "sub_title">search</p>
+            <h2 class = "title">Find Tickets</h2>
+            <form action = "../Submition/assigned_agents_options.php" method = "post">
+                <div class = "ticket_control">
+                    <label for = "departmentName">Department</label>
+                    <select name = "departmentName" class = "department_selector">
+                        <option value = ""></option>
+                        <?php include_once("../Submition/department_options.php"); ?>
+                    </select>
+                </div>
+                <div class = "ticket_control">
+                    <label for = "date">Date</label>
+                    <select name = "date" class = "department_selector">
+                        <option value = ""></option>
+                        <option value = "Recent">Most Recent</option>
+                        <option value = "Non-Recent">Oldest</option>
+                    </select>
+                </div>
+                <div class = "ticket_control">
+                    <label for = "assignedAgent">Assigned Agent</label>
+                    <select name = "assignedAgent" class = "department_selector">
+                        <option value = "/">/</option>
+                        <?php include_once("../Submition/assigned_agents_options.php"); ?>
+                    </select>
+                </div>
+                <div class = "ticket_control">
+                    <label for = "status">Status</label>
+                    <select name = "status" class = "department_selector">
+                        <option value = ""></option>
+                        <?php include_once("../Submition/status_options.php"); ?>
+                    </select>
+                </div>
+                <div class = "ticket_control">
+                    <label for = "priority">Priority</label>
+                    <select name = "priority" class = "department_selector">
+                        <option value = ""></option>
+                        <?php include_once("../Submition/priority_options.php"); ?>
+                    </select>
+                </div>
+                <div class = "ticket_control">
+                    <label for = "hashtag">Hashtags</label>
+                    <input type = "text" name = "hashtag" id = "hashtag_search_input" placeholder = "Type a hashtag...">
+                    <ul>
+                        
+                    </ul>
+                </div>
+                
+            </form>
+            <div class = "search_info"> 
+                <div class = "ticket_history">
+                </div>
             </div>
         </section>
 
                     
     </main>
 
-    <script src = "../java_script/main_page.js"></script>
+    <script src = "../java_script/main_page_agent.js"></script>
 </body>
 </html>

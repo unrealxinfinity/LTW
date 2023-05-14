@@ -2,6 +2,7 @@
    session_start();
 
    function setCurrentUser($username) {
+        $_SESSION['id'] = $username['id'];
     	$_SESSION['username'] = $username['username'];
         $_SESSION['email'] = $username['email'];
         $_SESSION['password'] = $username['password'];

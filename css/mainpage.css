@@ -27,6 +27,12 @@ h1, h2, h3{
     color: var(--heading_color);
 }
 
+a:visited, a:link{
+    color: #fff;
+}
+a:hover{
+    color: var(--main_color);
+}
 
 /* GLOBAL CLASSES*/
 
@@ -165,12 +171,6 @@ header nav ul li .active{
     .bar:before{
         display: block;
     }
-    #menu.sticky, .bar sticky{
-        top: 100px;
-    }
-    #menu:checked + .bar::before{
-        content:"\2715";
-    }
     header{
         left: -350px;
     }
@@ -178,6 +178,9 @@ header nav ul li .active{
 
 .toggle-header header{
     left: 0; 
+}
+.toggle-header .bar::before{
+    content: "\2715";
 }
 
 
@@ -386,7 +389,7 @@ main{
     font-size: 17px;
     letter-spacing: 0.5px;
 }
-#send .ticket_container form .ticket_control input, textarea, .department_selector{
+#send .ticket_container form .ticket_control input, textarea, .department_selector, #show_tickets, #show_assigned_tickets,#search_ticket_button, #browse form .ticket_control input{
     width: 100%;
     padding: 8px 15px;
     outline: none;
@@ -400,18 +403,19 @@ main{
     resize: none;
     transition: 0.3s;
 }
-#send .ticket_container form .ticket_control input[type="submit"]{
+#send .ticket_container form .ticket_control input[type="submit"], #show_tickets:hover, #show_assigned_tickets:hover,#search_ticket_button:hover{
     cursor: pointer;
     color: var(--main_color);
     font-weight: 500;
     transition: 0.3s;
     font-size: 20px;
 }
-#send .ticket_container form .ticket_control input[type="submit"]:hover{
+#send .ticket_container form .ticket_control input[type="submit"]:hover, #show_tickets:hover, #show_assigned_tickets:hover,#search_ticket_button:hover{
     color: white;
     background-color: var(--main_color);
     border: var(--border);
 }
+
 
 @media only screen and (max-width: 730px){
     #send .ticket_container{
@@ -419,3 +423,62 @@ main{
         margin: 0 auto;
     }
 }
+
+
+/* VIEW STARTS*/
+
+#view .ticket_history .ticket-box, #browse .ticket_history .ticket-box{
+    background-color: var(--box_bg_color);
+    border-radius: 10px;
+    padding: 35px 30px;
+    width: 50%;
+    margin-top: 20px;
+    
+}
+#view .ticket_history .ticket-box h2, #browse .ticket_history .ticket-box h2{
+    font-size: 22px;
+    font-weight: 400;
+    letter-spacing: 0.5px;
+    color: whitesmoke;
+    margin-right: 120px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+#show_tickets, #show_assigned_tickets, #browse form div{
+    width: 30%;
+}
+#search_ticket_button{
+    margin-top: 20px;
+}
+.status, .department, .priority, .date, .notified{
+    padding-right: 20px;
+}
+.notified:before{
+    content: "\2715";
+    background-color: var(--main_color);
+    color: var(--main_color);
+    border-radius: 30px;
+    font-size: 8px;
+    
+}
+.unotified:before{
+    display: none;
+}
+ul{
+    list-style: none;
+}
+
+.ticket_control ul li{
+    width: 100%;
+    background-color: #33333388;
+    border: 1px solid var(--box_bg_color);
+    padding: 2px 15px;
+    outline: none;
+}
+.ticket_control ul li:hover{
+    background-color: #222;
+    cursor: pointer;
+    
+}
+
+
