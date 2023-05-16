@@ -54,6 +54,8 @@ const hashtag_input = document.getElementById("hashtag_search_input");
 
 const hashtag_list = document.querySelector("#browse form .ticket_control ul");
 
+
+
 var final_hashtag = '';
 
 function get_best_hashtag(){
@@ -160,6 +162,21 @@ show_assigned_ticket_button.onsubmit = (e)=>{
     req.send();
 }*/
 
+//Adds click action to the FAQ question boxes
+function on_click_collapsible(){
+    let faqs = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < faqs.length; i++) {
+        faqs[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+            content.style.maxHeight = content.scrollHeight + "px";
+            content.scrollIntoView({behaviour:"smooth"});
+        });
+      }
+}
+on_click_collapsible();
+
+
 setInterval(()=>{
     let req = new XMLHttpRequest();
 
@@ -233,4 +250,63 @@ setInterval(()=>{
     }
 }, 500);
 
+//FAQS
+const FAQ_button = document.getElementById('FAQsubmit');
+const FAQForm = document.querySelector('.formFlex form');
+const popupHTML = document.getElementById('popMessage');
+const faqs_pos = document.getElementById('FAQBlock');
+const identifier='<div class="popup"><span class="popuptext" id="myPopup">Question already exists!</span></div>';
+const questions = document.getElementsByClassName('collapsible');
+const delete_FAQ_buttons = document.getElementsByClassName('material-icons');
 
+FAQForm.onsubmit=(e)=>{
+    e.preventDefault();
+}
+FAQ_button.onclick=()=>{
+    let req = new XMLHttpRequest();
+    req.open("POST","../Submition/insert_faq.php",true);
+    let form_info = new FormData(FAQForm);
+    req.onload = ()=>{
+        if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
+            let data = req.response;
+            if(data == identifier){
+                popupHTML.innerHTML = data;
+                 setTimeout(() => {
+                 popupHTML.innerHTML = '';
+                 }, 2000);
+            }
+            else{
+                faqs_pos.innerHTML=data;
+                on_click_collapsible();
+                delete_FAQ_buttons = document.getElementsByClassName('material-icons');
+                questions = document.getElementsByClassName('collapsible');
+            }
+        }
+    }
+    req.send(form_info);
+}
+
+function DeleteFAQ(i){
+    return function() {
+        let req = new XMLHttpRequest();
+
+       req.open("POST","../Submition/delete_faq.php",true);
+        var questionwExtraLetters = questions[i].textContent;
+        var question=questionwExtraLetters.slice(0,-6);
+        req.onload = ()=>{
+            let data = req.response;
+            if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
+                faqs_pos.innerHTML=data;
+                on_click_collapsible();
+                delete_FAQ_buttons = document.getElementsByClassName('material-icons');
+                questions = document.getElementsByClassName('collapsible');
+            }
+        console.log(question);
+        req.send("question=" + encodeURIComponent(question));
+
+        };
+    }
+}
+for (var i = 0; i < delete_FAQ_buttons.length; i++) {
+    delete_FAQ_buttons[i].addEventListener('click',DeleteFAQ(i));
+  }

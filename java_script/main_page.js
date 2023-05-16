@@ -7,6 +7,8 @@ let main = document.querySelector('main');
 let nav_links = document.querySelectorAll('header nav ul li a');
 
 
+
+
 var header_on = false;
 menu.addEventListener('click', () => {
     document.querySelector('body').classList.toggle('toggle-header');
@@ -66,7 +68,7 @@ button.onclick = () =>{
             let data = req.response;
             text_message.value = '';
             if(!show_history.classList.contains("pressed")) ticket_box.innerHTML = data;
-
+            
 
         }
     }
@@ -103,6 +105,18 @@ show_history.onclick = () =>{
         
     }
 }
+
+//Adds click action to the FAQ question boxes
+let faqs = document.getElementsByClassName("collapsible");
+for (var i = 0; i < faqs.length; i++) {
+    faqs[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var content = this.nextElementSibling;
+        content.style.maxHeight = content.scrollHeight + "px";
+        content.scrollIntoView({behaviour:"smooth"});
+    });
+  }
+
 setInterval(() =>{
     if(!show_history.classList.contains("pressed")){
         let req = new XMLHttpRequest();

@@ -481,4 +481,121 @@ ul{
     
 }
 
+/* FAQS */
+
+.collapsible{
+    background-color: #777;
+  color: white;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  border: none;
+  text-align: left;
+  outline: none;
+  font-size: 18px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+.collapsible.active{
+    background-color:var(--main_color);
+}
+.collapsible:hover{
+    background-color: #555;
+}
+
+  .collapsible.active + .faqContent {
+    display: block;
+}
+  
+  .collapsible + .faqContent {
+    max-height: 0px;
+}
+  
+  .collapsible.active + .faqContent {
+    max-height: 300px;
+}
+
+  .faqContent {
+    padding: 0px 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    color: black;
+    font-weight: bold;
+    transition: max-height 0.3s ease-out;
+
+}
+.material-icons{
+float:right;
+transition: 0.3s ease-in;
+}
+.material-icons:hover{
+    color: red;
+    transition:  0.3s ease-out;
+}
+.inputBox{
+    width: 100%;
+    padding: 10px;
+    color: black;
+    border:none;
+    outline: none;
+    margin-bottom: 1em;
+    font-size: medium;
+    margin-left: 0;
+}
+#FAQsubmit{
+    width: 100%;
+    padding: 10px;
+    color: white;
+    background-color: var(--main_color);
+    outline:none;
+    border:none;
+    margin: 1em 0;
+    font-size:medium;
+}
+.FAQForms {
+    display: flex;
+  }
+  
+  #FAQBlock {
+    flex: 1;
+  }
+  
+  .formFlex {
+    flex: 1;
+    padding-left: 20px; 
+  }
+  .formFlex form{
+    display: block;
+  }
+  #popMessage {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .popup {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    background-color: red;
+    color: black;
+    font-size: large;
+    padding: 10px;
+    border-radius: 10px;
+  }
+  
+  .popup::before {
+    content: "";
+    position: absolute;
+    bottom: -20px;
+    right: 20%;
+    border-style: solid;
+    border-width: 10px;
+    border-color: red transparent transparent transparent;
+    transform: translateX(50%);
+  }
+
 
