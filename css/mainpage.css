@@ -321,15 +321,17 @@ main{
     margin-bottom: 15px;
 }
 .control input[type="submit"]{
-    background: midnightblue;
+    background: var(--main_color);
     color: #fff;
     text-transform: uppercase;
     font-size: 1.2em;
     opacity: .8;
-    transition: opacity .3 ease;
+    transition:  0.1s ease-out;
+    border-radius: 2px
 }
 .control input[type="submit"]:hover{
-    opacity: 1;
+    background-color: midnightblue;
+    transition: 0.1 ease-in;
 }
 #info .account_info{
     display: flex;
@@ -484,7 +486,7 @@ ul{
 /* FAQS */
 
 .collapsible{
-    background-color: #777;
+    background-color: var(--box_bg_color);
   color: white;
   cursor: pointer;
   padding: 18px;
@@ -511,19 +513,20 @@ ul{
     max-height: 0px;
 }
   
-  .collapsible.active + .faqContent {
-    max-height: 300px;
-}
+
 
   .faqContent {
-    padding: 0px 18px;
+   
     display: none;
     overflow: hidden;
     background-color: #f1f1f1;
     color: black;
     font-weight: bold;
     transition: max-height 0.3s ease-out;
-
+    overflow-wrap: break-word;
+}
+.faqContent p{
+    margin:3%;
 }
 .material-icons{
 float:right;
@@ -547,11 +550,18 @@ transition: 0.3s ease-in;
     width: 100%;
     padding: 10px;
     color: white;
-    background-color: var(--main_color);
+    background-color:var(--main_color);
     outline:none;
     border:none;
     margin: 1em 0;
     font-size:medium;
+    transition: 0.1s ease-out;
+    border-radius: 2px;
+}
+#FAQsubmit:hover{
+    color: white;
+    background-color: midnightblue;
+    transition: 0.1s ease-in;
 }
 .FAQForms {
     display: flex;
@@ -559,6 +569,7 @@ transition: 0.3s ease-in;
   
   #FAQBlock {
     flex: 1;
+    max-width: 50%;
   }
   
   .formFlex {
