@@ -161,19 +161,7 @@ show_assigned_ticket_button.onsubmit = (e)=>{
     req.send();
 }*/
 
-//Adds click action to the FAQ question boxes
-function on_click_collapsible(){
-    let faqs = document.getElementsByClassName("collapsible");
-    for (var i = 0; i < faqs.length; i++) {
-        faqs[i].addEventListener("click", function() {
-          this.classList.toggle("active");
-          var content = this.nextElementSibling;
-            content.style.maxHeight = content.scrollHeight + "px";
-            content.scrollIntoView({behaviour:"smooth"});
-        });
-      }
-}
-on_click_collapsible();
+
 
 
 setInterval(()=>{
@@ -252,13 +240,32 @@ setInterval(()=>{
 
 
 //FAQS
+
+//Adds click action to the FAQ question boxes
+function on_click_collapsible(){
+    let faqs = document.getElementsByClassName("collapsible");
+    for (var i = 0; i < faqs.length; i++) {
+        faqs[i].addEventListener("click", function() {
+          this.classList.toggle("active");
+          var content = this.nextElementSibling;
+          if (this.classList.contains('active')) {
+            content.style.maxHeight = content.scrollHeight + 'px';
+          } else {
+            content.style.maxHeight = '0px';
+          }
+            
+        });
+      }
+}
+on_click_collapsible();
+
 const FAQ_button = document.getElementById('FAQsubmit');
 const FAQForm = document.querySelector('.formFlex form');
 const popupHTML = document.getElementById('popMessage');
 const faqs_pos = document.getElementById('FAQBlock');
 const identifier='<div class="popup"><span class="popuptext" id="myPopup">Question already exists!</span></div>';
-const questions = document.getElementsByClassName('collapsible');
-const delete_FAQ_buttons = document.getElementsByClassName('material-icons');
+questions = document.getElementsByClassName('collapsible');
+delete_FAQ_buttons = document.getElementsByClassName('material-icons');
 
 FAQForm.onsubmit=(e)=>{
     e.preventDefault();
@@ -278,36 +285,47 @@ FAQ_button.onclick=()=>{
             }
             else{
                 faqs_pos.innerHTML=data;
-                on_click_collapsible();
+                
                 delete_FAQ_buttons = document.getElementsByClassName('material-icons');
                 questions = document.getElementsByClassName('collapsible');
+                on_click_collapsible();
+                detect_buttons();
             }
         }
     }
     req.send(form_info);
 }
 
-function DeleteFAQ(i){
-    return function() {
+function DeleteFAQ(index){
+    return function(event) {
+        event.stopPropagation(); 
         let req = new XMLHttpRequest();
 
        req.open("POST","../Submition/delete_faq.php",true);
-        var questionwExtraLetters = questions[i].textContent;
+        var questionwExtraLetters = questions[index].textContent;
         var question=questionwExtraLetters.slice(0,-6);
         req.onload = ()=>{
             let data = req.response;
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
                 faqs_pos.innerHTML=data;
-                on_click_collapsible();
                 delete_FAQ_buttons = document.getElementsByClassName('material-icons');
                 questions = document.getElementsByClassName('collapsible');
+                on_click_collapsible();
+                detect_buttons();
             }
-        console.log(question);
-        req.send("question=" + encodeURIComponent(question));
-
+       
         };
+        var post_item = "question="+encodeURIComponent(question);
+        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        req.send(post_item);
     }
 }
-for (var i = 0; i < delete_FAQ_buttons.length; i++) {
-    delete_FAQ_buttons[i].addEventListener('click',DeleteFAQ(i));
-  }
+function detect_buttons(){
+    for (var i = 0; i < delete_FAQ_buttons.length; i++) {
+        delete_FAQ_buttons[i].addEventListener('click',DeleteFAQ(i));
+        delete_FAQ_buttons[i].addEventListener('click',function(event){
+            event.stopPropagation(); 
+        })
+      }
+}
+detect_buttons();
