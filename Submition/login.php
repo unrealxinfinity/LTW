@@ -1,6 +1,6 @@
 <?php
 include_once("../database/startup.php");
-include_once("../database/user.php");
+include_once("../database/.php");
 if(($username = isLoginCorrect($_POST['username'], $_POST['password'])) != -1){
 	setCurrentUser($username);
 	$role = get_role($_POST['username']);
