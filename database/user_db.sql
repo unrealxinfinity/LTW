@@ -81,6 +81,14 @@ CREATE TABLE tickets(
   notification VARCHAR
 );
 
+DROP TABLE IF EXISTS ticketHistory;
+
+CREATE TABLE ticketHistory(
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  ticketID REFERENCES tickets (ID),
+  message VARCHAR 
+);
+
 DROP TABLE IF EXISTS ticketHashtags;
 
 
@@ -134,6 +142,7 @@ INSERT INTO users (username, name, password, email) VALUES ('unrealinfinity', 'f
 INSERT INTO agents (agentID) VALUES (4);
 
 INSERT INTO admins (adminID) VALUES (4);
+
 
 INSERT INTO statuses (statusName) VALUES ('open');
 INSERT INTO statuses (statusName) VALUES ('assigned');

@@ -20,11 +20,13 @@ body{
     background: #c2bfbf;
     width: 450px;
     border-radius: 16px;
+    display: block;
     box-shadow: 0 0 128px 0 rgba(0,0,0,0.1),
                 0 32px 64px -48px rgba(0,0,0,0.5);
+        
 }
 #edit_wrapper{
-    height: 500px;
+    height: auto;
 }
 /*.wrapper .message-box{
     border-color: blue;
@@ -114,7 +116,7 @@ body{
     border-radius: 5px 0 0 5px;
     outline: none;
 }
-#send_message_button{
+#send_message_button, #add_hashtag_button{
     width: 55px;
     border: none;
     outline: none;
@@ -146,5 +148,94 @@ a{
     height: 30px;
 }
 
+
+#hashtag_search_input{
+    width: 100%;
+    padding: 8px 15px;
+    outline: none;
+    border: 2px solid var(--box_bg_color);
+    border-radius: 2px;
+    color: white;
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    background-color: #33333388;
+    resize: none;
+    transition: 0.3s;
+}
+
+
+.tag_list ul{
+    list-style: none;
+    color: white;
+    display: flex;
+    padding-left: 7%;
+    margin-right: 7%;
+    flex-wrap: wrap;
+}
+ul{
+    list-style: none;
+}
+.ticket_control ul li{
+    width: 100%;
+    background-color: #33333388;
+    border: 1px solid var(--box_bg_color);
+    padding: 2px 5px;
+    outline: none;
+    
+    
+
+
+}
+
+.ticket_control ul li:hover{
+    background-color: #222;
+    cursor: pointer;
+    
+}
+
+
+section .tag_list > ul li input:hover{
+    padding: 2px 15px;
+    background-color: rgb(12, 12, 246);
+}
+section .tag_list > ul li input{
+    padding: 2px 15px;
+    background-color: #33333388;
+    transition: .2s ease-in;
+    color: white;
+}
+
+section .tag_list > ul input.eliminate{
+    display:none;
+} 
+
+
+
+.history_box{
+    padding: 2px 15px;
+
+}
+.history_box p{
+    margin-bottom: 15px;
+    border-style: solid;
+    border-radius: 5px;
+    border: none;
+    background-color: grey;
+    height: 30px;
+    padding: 5px 10px;
+    color: white;
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+    word-wrap: break-word;
+}
+
+.back_arrow{
+    position:relative;
+    top: 40px;
+    left: 5px;
+    cursor: pointer;
+}
 
 

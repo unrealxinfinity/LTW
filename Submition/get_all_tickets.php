@@ -12,14 +12,14 @@ for($i = 0; $i < $tickets_count[0]['res']; $i++){
     if($tickets[$i]['status'] == 'open'){
         $ticket_info .='<div class = "ticket-box">
                             <div class = "ticket_basic_info">
-                                <a class = "date">'. $tickets[$i]['date'] .'</a>
-                                <a class = "status">'. $tickets[$i]['status'].'</a>
-                                <a class = "department">'. $tickets[$i]['departmentName'].'</a>
-                                <a class = "priority">'. $tickets[$i]['priority'].'</a>
+                                <a class = "date">'. htmlentities($tickets[$i]['date']) .'</a>
+                                <a class = "status">'. htmlentities($tickets[$i]['status']).'</a>
+                                <a class = "department">'. htmlentities($tickets[$i]['departmentName']).'</a>
+                                <a class = "priority">'. htmlentities($tickets[$i]['priority']).'</a>
                             </div>
-                            <h2>@'. $user_info[0]['username'] .'</h2>
-                            <p class = "ticket-problem">'. $tickets[$i]['title'] .'</p>
-                            <a href = "../Main/message.php?ticket_id='.$tickets[$i]['ID'].'">Respond</a>
+                            <h2>@'. htmlentities($user_info[0]['username']) .'</h2>
+                            <p class = "ticket-problem">'. htmlentities($tickets[$i]['title']) .'</p>
+                            <a href = "../Main/message.php?ticket_id='.htmlentities($tickets[$i]['ID']).'">Respond</a>
                         </div>
 
                         ';
@@ -27,17 +27,18 @@ for($i = 0; $i < $tickets_count[0]['res']; $i++){
     else{
         $ticket_info .='<div class = "ticket-box">
                             <div class = "ticket_basic_info">
-                                <a class = "date">'. $tickets[$i]['date'] .'</a>
-                                <a class = "status">'. $tickets[$i]['status'].'</a>
-                                <a class = "department">'. $tickets[$i]['departmentName'].'</a>
+                                <a class = "date">'. htmlentities($tickets[$i]['date']) .'</a>
+                                <a class = "status">'. htmlentities($tickets[$i]['status']).'</a>
+                                <a class = "department">'. htmlentities($tickets[$i]['departmentName']).'</a>
                             </div>
-                            <h2>@'. $user_info[0]['username'] .'</h2>
-                            <p class = "ticket-problem">'. $tickets[$i]['title'] .'</p>
+                            <h2>@'. htmlentities($user_info[0]['username']) .'</h2>
+                            <p class = "ticket-problem">'. htmlentities($tickets[$i]['title']) .'</p>
                         </div>
 
                         ';
     }
 }
+
 echo $ticket_info;
 
 

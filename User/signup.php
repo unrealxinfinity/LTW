@@ -20,7 +20,7 @@
                 <div class = "control">
                     <label for = "username">Username</label>
                     <input name="username" id = "username" type="text" placeholder="Username">
-                    <div class = "error"></div>
+                    <div class = "error"><?php if(isset($_SESSION['ERROR']) && $_SESSION['ERROR'] == "Duplicated Username"){echo $_SESSION['ERROR'];unset($_SESSION['ERROR']);}?></div>
                 </div>
                 <div class = "control">
                     <label for = "name">Name</label>
@@ -30,7 +30,7 @@
                 <div class = "control">
                     <label for = "email">E-mail</label>
                     <input name="email" id = "email" type="text" placeholder="E-mail">
-                    <div class = "error"></div>
+                    <div class = "error"><?php if(isset($_SESSION['ERROR']) && $_SESSION['ERROR'] == "Duplicated Email"){echo $_SESSION['ERROR'];unset($_SESSION['ERROR']);}?></div>
                 </div>
                 <div class = "control">
                     <label for = "password">Password</label>

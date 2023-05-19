@@ -100,7 +100,6 @@ search_ticket_form.onsubmit = (e)=>{
 
 hashtag_input.addEventListener("keyup", (e)=>{
 
-    console.log(hashtag_input);
 
     if(hashtag_input.value != '' && final_hashtag != hashtag_input.value){
 
@@ -198,7 +197,7 @@ setInterval(()=>{
     let form_info = new FormData(search_ticket_form);
     req.send(form_info);
 
-}, 200);
+}, 800);
 
 show_assigned_ticket_button.onclick = () =>{
     if(show_assigned_ticket_button.classList.contains("pressed")){
@@ -248,7 +247,9 @@ setInterval(()=>{
         }
         req.send();
     }
-}, 500);
+}, 800);
+
+
 
 //FAQS
 const FAQ_button = document.getElementById('FAQsubmit');

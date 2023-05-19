@@ -13,7 +13,7 @@ $message_info = '';
 
 $notification = get_notification($ticket_id);
 
-if(!(($notification[0]['notification'] == "client" && $_SESSION['role'] == "Agent") || ($notification[0]['notification'] == "agent" && $_SESSION['role'] == "Client"))){
+if(!(($notification[0]['notification'] == "client" && ($_SESSION['role'] == "Agent" || $_SESSION['role'] == "Admin")) || ($notification[0]['notification'] == "agent" && $_SESSION['role'] == "Client"))){
     change_notification($ticket_id, "none");
 }
 

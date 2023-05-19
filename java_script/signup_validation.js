@@ -14,7 +14,7 @@ form.addEventListener('submit', e => {
 });
 
 const is_valid_email = email => {
-  const test = /^[a-zA-Z]+@([a-zA-Z]+\.)+[a-zA-Z]{2,4}$/;
+  const test = /^[a-zA-Z0-9]+@([a-zA-Z]+\.)+[a-zA-Z]{2,4}$/;
   return test.test(String(email).toLowerCase());
 }
 const is_valid_username = username =>{

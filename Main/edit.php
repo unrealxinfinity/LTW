@@ -5,7 +5,7 @@ include_once("../database/user.php");
 
 $ticket = get_ticket($_GET['ticket_id']);
 $user;
-if($_SESSION['role'] == "Agent"){
+if($_SESSION['role'] == "Agent" || $_SESSION['role'] == "Admin"){
     $user = get_user_by_id($ticket[0]['clientID']);
 }
 else if($_SESSION['role']=="Client"){
@@ -24,6 +24,9 @@ else if($_SESSION['role']=="Client"){
 <body>
     <div class = "wrapper" id = "edit_wrapper">
         <section class = "message-area">
+            <div class = "back_arrow">
+                &#x25c0;
+            </div>
             <header>
                 <div class = "ticket-box">
                     <a class = "date"><?php echo $ticket[0]['date']; ?></a>
@@ -36,6 +39,26 @@ else if($_SESSION['role']=="Client"){
                 
                 
             </header>
+            <div class = "tag_list">
+                <ul id = "deletable_list">
+                    <?php include_once("../Edit/get_ticket_hashtags.php");?>
+                </ul>
+            </div>
+            <div id = "add_form">
+                <form action = "#" method = "post" class = "edit_typing_zone">
+                    <div class = "ticket_control">
+                        <label for = "hashtag">Hashtags</label>
+                        <input type = "text" name = "hashtag" id = "hashtag_search_input" placeholder = "Type a hashtag...">
+                        <ul>
+                            
+                        </ul>
+                    </div>
+                    <div class = "ticket_control">
+                        <input name = "ticket_id" type = "text" id = "ticket_add_id" value = "none" hidden>
+                        <input id = "add_hashtag_button" type = "submit" value = "Add" class = "edit_ticket_button">
+                    </div>
+                </form>
+            </div>
             <form action = "../Edit/update_ticket_info.php" method = "post" class = "edit_typing_zone">
                 <div class = "ticket_control">
                     <label for = "departmentName">Department</label>

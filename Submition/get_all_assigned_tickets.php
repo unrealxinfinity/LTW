@@ -26,6 +26,7 @@ for($i = 0; $i < $ticket_count[0]['res']; $i++){
                             <p class = "ticket-problem">'. $tickets[$i]['title'] .'</p>
                             <a href = "../Main/message.php?ticket_id='.$tickets[$i]['ID'].'">Respond</a>
                             <a href = "../Main/edit.php?ticket_id='.$tickets[$i]['ID'].'">Edit</a>
+                            <a href = "../Main/history.php?ticket_id='.$tickets[$i]['ID'].'">History</a>
                         </div>
 
                         ';
@@ -43,6 +44,7 @@ for($i = 0; $i < $ticket_count[0]['res']; $i++){
                                                 <p class = "ticket-problem">'. $tickets[$i]['title'] .'</p>
                                                 <a href = "../Main/message.php?ticket_id='.$tickets[$i]['ID'].'">Respond</a>
                                                 <a href = "../Main/edit.php?ticket_id='.$tickets[$i]['ID'].'">Edit</a>
+                                                <a href = "../Main/history.php?ticket_id='.$tickets[$i]['ID'].'">History</a>
                                             </div>
 
                                             ';
