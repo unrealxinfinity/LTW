@@ -23,7 +23,6 @@
                 <li><a href = "#info">Account</a></li>
                 <li><a href = "#send">Submit</a></li>
                 <li><a href = "#view">View</a></li>
-                <li><a href = "#FAQs"> FAQs</a></li>
                 
             </ul>
         </nav>
@@ -110,13 +109,6 @@
             </div>
         </section>
 
-        <section id = "FAQs" class = "padding">
-        <p class = "sub_title"> FAQs </p>
-        <h2 class ="title"> Frequently asked questions </h2>
-            <?php 
-                include_once("../Submition/get_faqs.php");
-            ?>
-        </section>
                     
     </main>
 

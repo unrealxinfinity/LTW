@@ -33,8 +33,8 @@ include_once("../database/user.php");
         
     }
     if($valid){
-        if($_SESSION['role'] == "Client"){header("Location:../Boot/main_page.php");}
-        else{ header("Location:../Boot/main_page_agent.php");}
+        if($_SESSION['role'] == "Client")header("Location:../Boot/main_page.php");
+        else header("Location:../Boot/main_page_agent.php");
     }
 
  ?>
