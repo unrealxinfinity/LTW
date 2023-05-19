@@ -55,6 +55,7 @@
 		global $db;
 		try {
 
+        
 			$stmt = $db->prepare('SELECT ID FROM tickets WHERE clientID = ?');
 			$stmt->execute(array($id));
 			return $stmt->fetchAll();
@@ -63,6 +64,29 @@
 			return null;
 		}
 	}
+    function getTicketHashtags($ticket_id){
+        global $db;
+		try {
+
+			$stmt = $db->prepare('SELECT * FROM ticketHashtags WHERE ticketID = ?');
+			$stmt->execute(array($ticket_id));
+			return $stmt->fetchAll();
+
+		}catch(PDOExecption $e) {
+			return null;
+		}
+    }
+    function remove_hashtag_from_ticket($ticket_id, $hashtagName){
+        global $db;
+        try {
+        $stmt = $db->prepare('DELETE FROM ticketHashtags WHERE ticketID = ? AND hashtagName = ?');
+        $stmt->execute(array($ticket_id, $hashtagName));
+        return true;
+        }
+        catch(PDOException $e) {
+        return false;
+        }
+    }
     function get_client_tickets_number($username) {
 		global $db;
 		try {
@@ -107,6 +131,16 @@
 		}catch(PDOExecption $e) {
 			return null;
 		}
+    }
+    function update_ticket_title($ticket_id, $title){
+        global $db;
+        try{
+            $stmt = $db->prepare('UPDATE tickets SET title = ? WHERE ID = ?');
+            $stmt->execute(array($title, $ticket_id));
+            return 0;
+        } catch(PDOException $e) {
+            return -1;
+        }
     }
     function change_ticket_status($ticket_id, $status){
         global $db;
@@ -351,6 +385,33 @@
 			return null;
 		}
     }
+    function isAlreadyAgentDepartment($agentID, $new_department){
+        global $db;
+        try {
+          $stmt = $db->prepare('SELECT * FROM agentDepartments WHERE agentID = ? AND departmentName = ?');
+          $stmt->execute(array($agentID, $new_department));
+          return($stmt->fetch());
+    
+        } catch(PDOException $e) {
+          return -1;
+        }
+    
+    }
+    function insert_agent_department($agentID, $new_department){
+        global $db;
+        try {
+            $stmt = $db->prepare('INSERT INTO agentDepartments(agentID, departmentName) VALUES (:agentID, :departmentName)');
+            $stmt->bindParam(':agentID', $agentID);
+            $stmt->bindParam(':departmentName', $new_department);
+            if($stmt->execute()){
+                return 0;
+            }
+            else
+                return -1;
+        } catch(PDOException $e) {
+            return -1;
+        }
+    }
     function get_agent_departments($agentID){
         global $db;
 		try {
@@ -372,6 +433,55 @@
 		}catch(PDOExecption $e) {
 			return null;
 		}
+    }
+    function doesFeatureAlreadyExist($feature, $new_feature){
+        global $db;
+		try {
+            $query_string = '';
+            if($feature == "Department"){
+                $query_string = 'SELECT * FROM departments WHERE departmentName = ?';
+            }
+            else if($feature == "Status"){
+                $query_string = 'SELECT * FROM statuses WHERE statusName = ?';
+            }
+            else{
+                $query_string = 'SELECT * FROM priorities WHERE priorityName = ?';
+            }
+            $stmt = $db->prepare($query_string);
+            $stmt->execute(array($new_feature));
+		    if($stmt->fetch() !== false) return true;
+            else return false;
+
+		}catch(PDOExecption $e) {
+			return null;
+		}
+    }
+    function insert_new_feature($feature, $new_feature){
+        global $db;
+        try {
+            $query_string = '';
+            if($feature == "Department"){
+                if(doesFeatureAlreadyExist($feature , $new_feature)) return -1;
+                $query_string = 'INSERT INTO departments(departmentName) VALUES (:featureName)';
+            }
+            else if($feature == "Status"){
+                if(doesFeatureAlreadyExist($feature , $new_feature)) return -1;
+                $query_string = 'INSERT INTO statuses(statusName) VALUES (:featureName)';
+            }
+            else{
+                if(doesFeatureAlreadyExist($feature , $new_feature))return -1;
+                $query_string = 'INSERT INTO priorities(priorityName) VALUES (:featureName)';
+            }
+            $stmt = $db->prepare($query_string);
+            $stmt->bindParam(':featureName', $new_feature);
+            if($stmt->execute()){
+                return 0;
+            }
+            else
+                return -1;
+        } catch(PDOException $e) {
+            return -1;
+        }
     }
     function get_departments(){
         global $db;
@@ -467,6 +577,57 @@
             return 0;
         } catch(PDOException $e) {
             return -1;
+        }
+    }
+    function add_ticket_hashtag($ticket_id, $hashtag){
+        global $db;
+        try{
+            $stmt = $db->prepare('SELECT title FROM tickets WHERE ID = ?');
+            $stmt->execute(array($ticket_id));
+            $title = $stmt->fetch();
+
+            $title['title'] .= " ";
+            $title['title'] .= $hashtag;
+
+            $stmt = $db->prepare('UPDATE tickets SET title = ? WHERE ID = ?');
+            $stmt->execute(array($title['title'], $ticket_id));
+            return 0;
+        } catch(PDOException $e) {
+            return -1;
+        }
+    }
+    function add_to_history($ticket_id, $data, $previous_data, $type){
+        global $db;
+        try {
+            $message = '';
+            if($previous_data == ''){
+                $message = ''.$type.' changed to '.$data.'';
+            }
+            else if($data == ''){
+                $message = ''.$type.' was removed';
+            }
+            else $message = ''.$type.' changed from '.$previous_data.' to '.$data.'';
+            $stmt = $db->prepare('INSERT INTO ticketHistory(ticketID, message) VALUES (:ticketID, :message)');
+            $stmt->bindParam(':ticketID', $ticket_id);
+            $stmt->bindParam(':message', $message);
+            if($stmt->execute()){
+                return 0;
+            }
+            else
+                return -1;
+        } catch(PDOException $e) {
+            return -1;
+        }
+    }
+
+    function get_ticket_history($ticket_id){
+        global $db;
+        try{
+            $stmt = $db->prepare('SELECT * FROM ticketHistory WHERE ticketID = ?');
+            $stmt->execute(array($ticket_id));
+            return $stmt->fetchAll();
+        } catch(PDOException $e) {
+            return null;
         }
     }
 ?>

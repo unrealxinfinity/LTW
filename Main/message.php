@@ -5,7 +5,7 @@ include_once("../database/user.php");
 
 $ticket = get_ticket($_GET['ticket_id']);
 $user;
-if($_SESSION['role'] == "Agent"){
+if($_SESSION['role'] == "Agent" || $_SESSION['role'] == "Admin"){
     $user = get_user_by_id($ticket[0]['clientID']);
 }
 else if($_SESSION['role']=="Client"){
@@ -23,6 +23,9 @@ else if($_SESSION['role']=="Client"){
 </head>
 <body>
     <div class = "wrapper">
+        <div class = "back_arrow">
+            &#x25c0;
+        </div>
         <section class = "message-area">
             <header>
                 <div class = "ticket-box">

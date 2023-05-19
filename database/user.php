@@ -16,6 +16,19 @@
     }
   }
 
+  function get_users(){
+    global $db;
+    try {
+      $stmt = $db->prepare('SELECT * FROM users');
+      $stmt->execute();
+      return $stmt->fetchAll();
+    
+    }catch(PDOException $e) {
+      return null;
+    }
+  }
+
+
   function createUser($username, $name, $password, $email) {
     global $db;
     try {
@@ -123,6 +136,28 @@
     
     }catch(PDOException $e) {
       return null;
+    }
+  }
+  function isAdmin($id){
+    global $db;
+    try {
+      $stmt = $db->prepare('SELECT * FROM admins WHERE adminID = ?');
+      $stmt->execute(array($id));
+      return($stmt->fetch());
+
+    } catch(PDOException $e) {
+      return -1;
+    }
+  }
+  function isAgent($id){
+    global $db;
+    try {
+      $stmt = $db->prepare('SELECT * FROM agents WHERE agentID = ?');
+      $stmt->execute(array($id));
+      return($stmt->fetch());
+
+    } catch(PDOException $e) {
+      return -1;
     }
   }
   function AlreadyRegisteredUsername($username) {

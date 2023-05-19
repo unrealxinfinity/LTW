@@ -5,11 +5,11 @@ include_once("../database/user.php");
 
 
 $ticket_id = $_POST['ticket_id'];
-$message_content = $_POST['message_value'];
+$message_content = preg_replace("/[^a-zA-Z0-9#()=!?\s]/", '', $_POST['message_value']);
 $user_id = $_SESSION['id'];
 $role = $_SESSION['role'];
 
-if($role == "Agent"){
+if($role == "Agent" || $role == "Admin"){
     $ticket = get_ticket($ticket_id);
     if($ticket[0]['status'] == "open"){
         change_ticket_status($ticket_id, "assigned");

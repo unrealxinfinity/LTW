@@ -67,6 +67,9 @@ a:hover{
     height: 100%;
     z-index: -1;
 }
+.btn:hover{
+    color:white;
+}
 .padding{
     padding: 120px 5%;
 }
@@ -389,7 +392,7 @@ main{
     font-size: 17px;
     letter-spacing: 0.5px;
 }
-#send .ticket_container form .ticket_control input, textarea, .department_selector, #show_tickets, #show_assigned_tickets,#search_ticket_button, #browse form .ticket_control input{
+#send .ticket_container form .ticket_control input, textarea, .department_selector, #show_tickets, #show_assigned_tickets,#search_ticket_button, #browse form .ticket_control input, #promote .ticket_control input, #AgentDepartments .ticket_control input{
     width: 100%;
     padding: 8px 15px;
     outline: none;
@@ -444,7 +447,7 @@ main{
     margin-top: 20px;
     margin-bottom: 20px;
 }
-#show_tickets, #show_assigned_tickets, #browse form div{
+#show_tickets, #show_assigned_tickets, #browse form div, #promote form div, #add form div, #AgentDepartments form div{
     width: 30%;
 }
 #search_ticket_button{
@@ -464,6 +467,7 @@ main{
 .unotified:before{
     display: none;
 }
+
 ul{
     list-style: none;
 }
@@ -481,4 +485,22 @@ ul{
     
 }
 
+#promote form .ticket_control p, #AgentDepartments form .ticket_control select{
+    height: 35px;
+    background-color: #33333388;
+    border: 1px solid var(--box_bg_color);
+    outline: none;
+    padding: 8px 20px;
+    color: white;
+    font-size: 17px;
+    font-weight: 300;
+    letter-spacing: 0.5px;
+}
+input[type="submit"]:hover{
+    cursor:pointer;
+}
+
+#new_feature{
+    width: 100%;
+}
 

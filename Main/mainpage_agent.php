@@ -1,3 +1,11 @@
+<?php
+
+include_once("../database/startup.php");
+include_once("../database/user.php");
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +72,11 @@
                             <div class = "error"></div>
                         </div>
                         <div class = "control">
+                            <label for = "confirm_password"></label>
+                            <input name="confirm_password" id = "confirm_password" type="password" placeholder="Confirm Password">
+                            <div class = "error"></div>
+                        </div>
+                        <div class = "control">
                             <input type="submit" name="Submit" value="Change">
                         </div>
                     </form>
@@ -71,7 +84,10 @@
                 <div class = "curr_info">
                         <ul>
                             <li><a href = "../Boot/login.php" class = "btn">Logout</a></li>
-                            <li><a href = "../Submition/change_to_client.php" class = "btn">Change to client</a></li>
+                            <?php if(isAdmin($_SESSION['id'])){
+                                echo '<li><a href = "../Boot/main_page_admin.php" class = "btn">Change to Admin</a></li>';
+                            }?>
+                            <li><a href = "../Boot/change_to_client.php" class = "btn">Change to client</a></li>
                         </ul>
                 </div>
             </div>

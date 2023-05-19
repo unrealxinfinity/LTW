@@ -74,3 +74,11 @@ setInterval(() =>{
 function scroll_bottom(){
     message_box.scrollTop = message_box.scrollHeight;
 }
+
+const back_arrow = document.querySelector(".wrapper .back_arrow");
+
+console.log(back_arrow);
+
+back_arrow.addEventListener("click", ()=>{
+    window.location.replace("../Boot/main_page.php");
+});

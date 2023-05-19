@@ -1,3 +1,16 @@
+<?php
+
+include_once("../database/startup.php");
+include_once("../database/user.php");
+
+if(!isset($_SESSION['id'])){
+    header("Location:".$_SERVER['HTTP_REFERER']."");
+}
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,6 +77,11 @@
                             <div class = "error"></div>
                         </div>
                         <div class = "control">
+                            <label for = "confirm_password"></label>
+                            <input name="confirm_password" id = "confirm_password" type="password" placeholder="Confirm Password">
+                            <div class = "error"></div>
+                        </div>
+                        <div class = "control">
                             <input type="submit" name="Submit" value="Change">
                         </div>
                     </form>
@@ -71,6 +89,12 @@
                 <div class = "curr_info">
                         <ul>
                             <li><a href = "../Boot/login.php" class = "btn">Logout</a></li>
+                            <?php if(isAdmin($_SESSION['id'])){
+                                echo '<li><a href = "../Boot/main_page_admin.php" class = "btn">Change to Admin</a></li>';
+                            }?>
+                            <?php if(isAgent($_SESSION['id'])){
+                                echo '<li><a href = "../Boot/main_page_agent.php" class = "btn">Change to Agent</a></li>';
+                            }?>
                         </ul>
                 </div>
             </div>
@@ -84,9 +108,8 @@
                     <div class = "ticket_control">
                         <label for = "department">Department</label>
                         <select name = "department" class = "department_selector">
-                            <option value = ""></option>
-                            <option value = "Accounting">Accounting</option>
-                            <option value = "Sales">Sales</option>
+                            <option></option>
+                            <?php include_once("../Submition/department_options.php")?>
                         </select>
                     </div>
                     <div class = "ticket_control">
