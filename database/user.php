@@ -4,7 +4,7 @@
   function isLoginCorrect($username, $password) {
     global $db;
     try {
-      $stmt = $db->prepare('SELECT * FROM Clients WHERE username = ? AND password = ?');
+      $stmt = $db->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
       $stmt->execute(array($username, $password));
       if($stmt->fetch() !== false) {
         return getUser($username);
@@ -76,7 +76,6 @@
   function getUser($username) {
     global $db;
     try {
-
       $stmt = $db->prepare('SELECT id, username, name, email, password FROM users WHERE username = ?');
       $stmt->execute(array($username));
       return $stmt->fetch();
@@ -129,7 +128,7 @@
   function AlreadyRegisteredUsername($username) {
     global $db;
     try {
-      $stmt = $db->prepare('SELECT username FROM Clients WHERE username = ?');
+      $stmt = $db->prepare('SELECT username FROM users WHERE username = ?');
       $stmt->execute(array($username));
       return $stmt->fetch()  !== false;
     
@@ -140,7 +139,7 @@
   function AlreadyRegisteredEmail($email) {
     global $db;
     try {
-      $stmt = $db->prepare('SELECT email FROM Clients WHERE email = ?');
+      $stmt = $db->prepare('SELECT email FROM users WHERE email = ?');
       $stmt->execute(array($email));
       return $stmt->fetch()  !== false;
     
@@ -169,7 +168,7 @@
   function deleteUser($username) {
     global $db;
     try {
-      $stmt = $db->prepare('DELETE FROM Clients WHERE username = ?');
+      $stmt = $db->prepare('DELETE FROM users WHERE username = ?');
       $stmt->execute(array($username));
       return true;
     }
