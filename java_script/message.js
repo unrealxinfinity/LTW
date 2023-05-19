@@ -74,3 +74,52 @@ setInterval(() =>{
 function scroll_bottom(){
     message_box.scrollTop = message_box.scrollHeight;
 }
+
+//Quick Answers section
+quickAnswersSection = document.getElementById('FAQDropUpContent');
+quickAnswerButton = document.getElementById('FAQDropUpButton'); 
+
+function show_quick_answers(){
+
+    let req = new XMLHttpRequest();
+    req.open ("POST","../Submition/get_quick_answers.php",true);
+    req.onload = ()=>{
+    if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
+        let data = req.response;
+        quickAnswersSection.innerHTML=data;
+    }
+};
+req.send();
+}
+
+quickAnswerButton.onclick = ()=>{
+    quickAnswerButton.classList.toggle("active");
+    if(quickAnswerButton.classList.contains('active')){
+        quickAnswers = document.getElementsByClassName('QuickAnswers');
+        show_quick_answers();
+        detect_quick_answers();
+    }
+    else{
+        quickAnswersSection.innerHTML='';
+    }
+    
+    
+}
+
+function detect_quick_answers(){
+    if(quickAnswerButton.classList.contains('active')){
+        setTimeout(() => {
+            let quickAnswers = document.getElementsByClassName('AnswerContainer');
+            for(var i = 0; i<quickAnswers.length;i++){
+                (function(index) {
+
+                    quickAnswers[index].onclick = () => {
+                       const quickMessageToSend= quickAnswers[index].textContent;
+                       document.getElementById("message_val").value=quickMessageToSend;
+                    };
+                  })(i);
+                }
+            }, 100); 
+    }
+   
+}

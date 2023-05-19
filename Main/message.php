@@ -20,6 +20,7 @@ else if($_SESSION['role']=="Client"){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href = "../css/message.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
 <body>
     <div class = "wrapper">
@@ -73,6 +74,14 @@ else if($_SESSION['role']=="Client"){
                 <input name = "ticket_id" type = "text" id = "id_ticket" value = "none" hidden>
                 <input name = "message_value" id = "message_val" type = "text" placeholder = "Type a message here...">
                 <input id = "send_message_button" type = "submit" value = "Send">
+
+                <div class = "FAQDropUp">
+                    <button id= "FAQDropUpButton"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M12 8l-5 5 1.41 1.41L12 10.83l3.59 3.58L17 13z" /></svg>
+                    </button>
+                    <div id = "FAQDropUpContent"></div>
+                </div>
+
             </form>
         </section>
     </div>

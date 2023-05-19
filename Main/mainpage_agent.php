@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href = "../css/mainpage.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <script defer src = "../java_script/edit_profile_validation.js"></script>
     <title>Main Page</title>
 </head>
@@ -23,6 +24,7 @@
                 <li><a href = "#info">Account</a></li>
                 <li><a href = "#view">View</a></li>
                 <li><a href = "#browse">Browse</a></li>
+                <li><a href = "#FAQs">FAQs</a></li>
                 
             </ul>
         </nav>
@@ -141,6 +143,27 @@
             </div>
         </section>
 
+        <section id = "FAQs" class = "padding">
+        <p class = "sub_title"> FAQs </p>
+        <h2 class ="title"> FAQs Control </h2>
+        <div class  ="FAQForms">
+            <div id = "FAQBlock">
+             <?php 
+                include_once("../Submition/get_faqs.php");
+                ?>
+            </div>
+            <div class= "formFlex">
+            <form action="#" method="post">
+                <input name='question' id='question' type='text' placeholder='Write a question' class = 'inputBox'>
+                <input name='answer' id='answer' type='text' placeholder='Write an answer' class = 'inputBox'>
+                <div id='popMessage'> </div>
+                <button type='submit' value = 'Register' id='FAQsubmit' > Register </button>
+            </form>
+            </div>
+            
+            <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+        </div>
+        </section>
                     
     </main>
 
