@@ -5,9 +5,9 @@
 
 # Project
 ## NightSolve 
-#### This website is a ticket exchange website built on the basis of problem solving between different users who belong to different departments, in a company or similar.
+#### This website is a ticket exchange website built on the basis of problem solving between different users who belong to different departments, in a company or similar;   Ideal for companies that work at night.
 ### Main features (check means feature implemented): 
-- [x] **Account creation**: Website allows users to create their own accounts;  
+- [x] [Account Creation](readme.md/#screenshots): Website allows users to create their own accounts;  
 - [x] **Profile**: Each user has their unique profile that they can edit;
 - [x] **Ticket system**: Allows users to communicate with each other via ticket exchange , each ticket belongs to one requester and one solver;
   - - [x] **Ticket history**: Users can check their associated tickets;
@@ -29,4 +29,18 @@
   - - [x] **Edit ticket hashtags**: Agents can add or remove hashtags from a ticket;
   - - [x] **Ticket history**: Agents can check changes done to a ticket in the ticket history;
 - [x] **Manage FAQs**: Agents can add and remove FAQs of the website;
-  
+
+### Associated to Admin:
+- [x] **Upgrade a user's priviledge**;
+- [x] **Add new statuses**;
+- [x] **Assign Agents to different departments**;
+- [x] **Highest Priviledge**: Means as admin they can do whatever the other types of user can do.
+
+### Technologies used:
+- Pages mainly built on HTML;
+- Every data is stored in a Sqlite database;
+- PHP to retrieve from/insert data to the database and to make templates of certain sections of pages;
+- JavaScript to make the website interactive in conjuction with CSS and AJAX (to get data from the server), to style html elements to enhance the user experience;
+
+## Screenshots: 
+### Account Creation
