@@ -42,7 +42,8 @@
 - PHP to retrieve from/insert data to the database and to make templates of certain sections of pages;
 - JavaScript to make the website interactive in conjuction with CSS and AJAX (to get data from the server), to style html elements to enhance the user experience;
 
-## Screenshots: 
+## Screenshots: ![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/56fb6eba-e8be-458c-a43a-ab79baaa4c71)
+
 ### Account Creation
 ### Profile
 ### Ticket System
