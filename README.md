@@ -7,7 +7,7 @@
 ## NightSolve 
 #### This website is a ticket exchange website built on the basis of problem solving between different users who belong to different departments, in a company or similar;   Ideal for companies that work at night.
 ### Main features (check means feature implemented): 
-- [x] [Account Creation](readme.md/#screenshots): Website allows users to create their own accounts;  
+- [x] [Account Creation](#account-creation): Website allows users to create their own accounts;  
 - [x] **Profile**: Each user has their unique profile that they can edit;
 - [x] **Ticket system**: Allows users to communicate with each other via ticket exchange , each ticket belongs to one requester and one solver;
   - - [x] **Ticket history**: Users can check their associated tickets;
