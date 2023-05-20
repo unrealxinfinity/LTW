@@ -56,7 +56,10 @@
 ![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/d7a11415-3edf-4d77-97f5-f11199122d57)
 ### Edit a ticket
 ![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/f6d3ef5e-0766-44ca-8fd6-cf18be8dfbc8)
-### Manage FAQs
+### View ticket history
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/35d4eac7-23ca-4e32-90f2-cc9ec0846fe1)
+### Talk with Assigned Agent
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/95cafc78-b52d-41c9-9278-82e28bdbf6e0)
 ### Upgrade priviledge
 ![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/2248ebba-03fc-499f-9b60-85af6349536c)
 ### Add new statuses
