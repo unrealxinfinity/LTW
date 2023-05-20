@@ -42,15 +42,24 @@
 - PHP to retrieve from/insert data to the database and to make templates of certain sections of pages;
 - JavaScript to make the website interactive in conjuction with CSS and AJAX (to get data from the server), to style html elements to enhance the user experience;
 
-## Screenshots: ![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/56fb6eba-e8be-458c-a43a-ab79baaa4c71)
-
+## Screenshots:
 ### Account Creation
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/56fb6eba-e8be-458c-a43a-ab79baaa4c71)
 ### Profile
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/97cad4ae-8c26-4773-9726-4f234735a5a4)
 ### Ticket System
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/1c81c73f-05ea-4124-b423-833eee9d862a)
 ### FAQs
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/cf4df7b8-cc3a-4e36-886d-c6e404703fb0)
 ### Viewing the tickets
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/d7c24a80-8e75-4a9b-b762-06488ced990b)
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/d7a11415-3edf-4d77-97f5-f11199122d57)
 ### Edit a ticket
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/f6d3ef5e-0766-44ca-8fd6-cf18be8dfbc8)
 ### Manage FAQs
 ### Upgrade priviledge
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/2248ebba-03fc-499f-9b60-85af6349536c)
 ### Add new statuses
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/4f4238ac-2301-4e3b-94fb-c6197a28fa7c)
 ### Assign Agents to departments
+![image](https://github.com/FEUP-LTW-2023/project-ltw14g04/assets/95939460/8a428f12-e989-4703-a911-1b44dd8c94d2)
