@@ -26,9 +26,13 @@ main.addEventListener('click', () =>{
 
 let Section = document.querySelectorAll('section');
 window.addEventListener('scroll', () => {
-    const scroll_position = window.scrollY + 10
+    const scroll_position = window.scrollY +10;
     Section.forEach(section => {
-        if(scroll_position > section.offsetTop && scroll_position < (section.offsetTop + section.offsetHeight)){
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.offsetHeight;
+        const sectionBottom = section.offsetTop + section.offsetHeight;
+        if(  scrollPosition > sectionTop &&
+            scrollPosition < sectionTop + sectionHeight || scrollPosition <= sectionBottom){
             nav_links.forEach(link => {
                 link.classList.remove('active');
                 if(section.getAttribute('id') === link.getAttribute('href').substring(1)){
