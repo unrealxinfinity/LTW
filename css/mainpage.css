@@ -566,6 +566,7 @@ transition: 0.3s ease-in;
     color: white;
     background-color: midnightblue;
     transition: 0.1s ease-in;
+    cursor: pointer;
 }
 .FAQForms {
     display: flex;

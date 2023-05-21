@@ -51,21 +51,21 @@ const show_history = document.getElementById("show_tickets");
 
 
 
-send_ticket_form.onsubmit = (e)=>{
+send_ticket_form.addEventListener('submit', (e)=>{
     e.preventDefault();
-}
-show_history.onsubmit = (e)=>{
+});
+show_history.addEventListener('submit', (e)=>{
     e.preventDefault();
-}
+});
 
-button.onclick = () =>{
+button.addEventListener('click', () =>{
     let req = new XMLHttpRequest();
     
-    req.open("POST", "../Submition/send_ticket.php", true);
+    req.open("POST", "../Actions/send_ticket.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-            let data = req.response;
+            const data = req.response;
             text_message.value = '';
             if(!show_history.classList.contains("pressed")) ticket_box.innerHTML = data;
             
@@ -75,16 +75,18 @@ button.onclick = () =>{
 
     let form_info = new FormData(send_ticket_form);
     req.send(form_info)
-}
-show_history.onclick = () =>{
+});
+
+
+show_history.addEventListener('click', () =>{
     if(show_history.classList.contains("pressed")){
         let req = new XMLHttpRequest();
     
-        req.open("POST", "../Submition/get_ticket.php", true);
+        req.open("GET", "../Actions/get_ticket.php", true);
 
         req.onload = () =>{
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
+                const data = req.response;
                 ticket_box.innerHTML = data;
                 show_history.classList.remove("pressed");
                 show_history.value = "Hide";
@@ -104,7 +106,7 @@ show_history.onclick = () =>{
 
         
     }
-}
+});
 
 //Adds click action to the FAQ question boxes
 let faqs = document.getElementsByClassName("collapsible");
@@ -121,11 +123,11 @@ setInterval(() =>{
     if(!show_history.classList.contains("pressed")){
         let req = new XMLHttpRequest();
         
-        req.open("POST", "../Submition/get_ticket.php", true);
+        req.open("GET", "../Actions/get_ticket.php", true);
 
         req.onload = () =>{
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
+                const data = req.response;
                 if(!show_history.classList.contains("pressed"))ticket_box.innerHTML = data;
                 
 

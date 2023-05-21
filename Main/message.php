@@ -3,7 +3,19 @@ include_once("../database/startup.php");
 include_once("../database/tickets.php");
 include_once("../database/user.php");
 
+if(!isset($_SESSION['id'])){
+    header("Location:../start.php");
+}
+
 $ticket = get_ticket($_GET['ticket_id']);
+
+
+if($ticket[0]['assignedAgentID'] != $_SESSION['id'] && $_SESSION['role'] != "Client" && $ticket[0]['assignedAgentID'] != 1){
+    header("Location:../Boot/main_page.php");
+}
+if($ticket[0]['clientID'] != $_SESSION['id'] && $_SESSION['role'] == "Client"){
+    header("Location:../Boot/main_page.php");
+}
 $user;
 if($_SESSION['role'] == "Agent" || $_SESSION['role'] == "Admin"){
     $user = get_user_by_id($ticket[0]['clientID']);
@@ -77,6 +89,7 @@ else if($_SESSION['role']=="Client"){
                 <input name = "ticket_id" type = "text" id = "id_ticket" value = "none" hidden>
                 <input name = "message_value" id = "message_val" type = "text" placeholder = "Type a message here...">
                 <input id = "send_message_button" type = "submit" value = "Send">
+                <input name = "csrf" value = "<?=$_SESSION['csrf']?>" hidden>
 
                 <div class = "FAQDropUp">
                     <button id= "FAQDropUpButton"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">

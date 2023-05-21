@@ -15,5 +15,8 @@ if(isset($_SESSION['id'])){
         include_once("../Main/mainpage.php");
     }
 }
+else{
+    header("Location:../start.php");
+}
 
 ?>

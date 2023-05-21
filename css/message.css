@@ -116,7 +116,7 @@ body{
     border-radius: 5px 0 0 5px;
     outline: none;
 }
-#send_message_button{
+#send_message_button, #add_hashtag_button{
     width: 60px;
     border: none;
     outline: none;
@@ -124,7 +124,6 @@ body{
     color: #fff;
     font-size: 19px;
     cursor: pointer;
-    margin:0;
 }
 #send_message_button:active{
     background-color: aqua;
@@ -185,6 +184,7 @@ ul{
     border: 1px solid var(--box_bg_color);
     padding: 2px 5px;
     outline: none;
+    color:white;
     
     
 
@@ -192,8 +192,8 @@ ul{
 }
 
 .ticket_control ul li:hover{
-    background-color: #222;
     cursor: pointer;
+    background-color: rgb(12, 12, 246);
     
 }
 
@@ -260,12 +260,13 @@ section .tag_list > ul input.eliminate{
 }
 #FAQDropUpContent{
     position: absolute;
-  bottom:20%;
+  bottom:15%;
   background-color: #f1f1f1;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
   overflow-y: auto;
   max-height:40%;
+  overflow-x: hidden;
   translate: -73%;
 }
 .QuickAnswers{
@@ -297,6 +298,7 @@ section .tag_list > ul input.eliminate{
 }
 .AnswerContainer:hover{
     display: block;
+    cursor: pointer;
 }
 .QuickAnswers:hover{
     background-color:#c2bfbf;

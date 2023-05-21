@@ -129,19 +129,7 @@ INSERT INTO agents (agentID) VALUES (1);
 
 INSERT INTO admins (adminID) VALUES (1);
 
-INSERT INTO users (username, name, password, email) VALUES ('Manu', 'Manuel Seraphim', 'Gatosecaes123.', 'manuelseraphim@gmail.com');
 
-INSERT INTO users (username, name, password, email) VALUES ('jomi', 'jomi', 'Gatosecaes123.', 'miguelvieiracardoso@gmail.com');
-
-INSERT INTO agents (agentID) VALUES (3);
-
-INSERT INTO agentDepartments(agentID, departmentName) VALUES(3, 'Accounting');
-
-INSERT INTO users (username, name, password, email) VALUES ('unrealinfinity', 'fu', 'Gatosecaes123.', 'fuhaochang@gmail.com');
-
-INSERT INTO agents (agentID) VALUES (4);
-
-INSERT INTO admins (adminID) VALUES (4);
 
 
 INSERT INTO statuses (statusName) VALUES ('open');
@@ -154,11 +142,8 @@ INSERT INTO priorities (priorityName) VALUES ('medium');
 INSERT INTO priorities (priorityName) VALUES ('high');
 INSERT INTO priorities (priorityName) VALUES ('highest');
 
-INSERT INTO faqs (question,answer) VALUES ('How to edit my profile?','By going through the Account section, you can edit your profile by filling the asked form.');
-INSERT INTO faqs (question,answer) VALUES ('How to submit a ticket?','At the section Submition, you can submit a ticket visible by all agents after filling the required form and pressing Send button.');
+INSERT INTO faqs (question,answer) VALUES ('How do I change my password?','Use the edit profile section');
 
-
---INSERT INTO messages (ID, text, ticketID, userID, agentID) VALUES(1, 'Hello this is a response', 4, 2, 3);
 
 
 

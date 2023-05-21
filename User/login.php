@@ -1,3 +1,11 @@
+<?php
+include_once("../database/startup.php");
+
+session_destroy();
+
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -16,7 +24,7 @@
     <section>
         <div class="register_content">
             <h1>Login</h1>
-            <form action="../Submition/login.php" method="post" class="register_form" id = "register_form">
+            <form action="../Actions/login.php" method="post" class="register_form" id = "register_form">
                 <div class = "control">
                     <label for = "username">Username</label>
                     <input name="username" id = "username" type="text" placeholder="Username">

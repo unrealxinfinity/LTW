@@ -1,15 +1,20 @@
 <?php
 
-
+  function generate_random_token() {
+    return bin2hex(openssl_random_pseudo_bytes(32));
+  }
   function isLoginCorrect($username, $password) {
     global $db;
     try {
-      $stmt = $db->prepare('SELECT * FROM users WHERE username = ? AND password = ?');
-      $stmt->execute(array($username, $password));
+      $stmt = $db->prepare('SELECT * FROM users WHERE username = ?');
+      $stmt->execute(array($username));
       if($stmt->fetch() !== false) {
-        return getUser($username);
+        $user = getUser($username);
+        if(password_verify($password, $user['password'])){
+          return $user;
+        }
       }
-      else return -1;
+      return -1;
 
     } catch(PDOException $e) {
       return -1;
@@ -32,10 +37,11 @@
   function createUser($username, $name, $password, $email) {
     global $db;
     try {
+      $options = ['cost' => 12];
   	  $stmt = $db->prepare('INSERT INTO users(Username, Name, Password, Email) VALUES (:username,:name,:password,:email)');
   	  $stmt->bindParam(':username', $username);
       $stmt->bindParam(':name', $name);
-  	  $stmt->bindParam(':password', $password);
+  	  $stmt->bindParam(':password', password_hash($password, PASSWORD_DEFAULT, $options));
   	  $stmt->bindParam(':email', $email);
       if($stmt->execute()){
         $user = getUser($username);
@@ -143,7 +149,7 @@
     try {
       $stmt = $db->prepare('SELECT * FROM admins WHERE adminID = ?');
       $stmt->execute(array($id));
-      return($stmt->fetch());
+      return $stmt->fetch() !== false;
 
     } catch(PDOException $e) {
       return -1;
@@ -154,7 +160,7 @@
     try {
       $stmt = $db->prepare('SELECT * FROM agents WHERE agentID = ?');
       $stmt->execute(array($id));
-      return($stmt->fetch());
+      return $stmt->fetch() !== false;
 
     } catch(PDOException $e) {
       return -1;
@@ -185,12 +191,13 @@
   function update_user($previous_username, $username, $name, $email, $password){
     global $db;
     try{
+      $options = ['cost' => 12];
       $stmt = $db->prepare('UPDATE users SET name = ? WHERE username = ?');
       $stmt->execute(array($name, $previous_username));
       $stmt = $db->prepare('UPDATE users SET email = ? WHERE username = ?');
       $stmt->execute(array($email, $previous_username));
       $stmt = $db->prepare('UPDATE users SET password = ? WHERE username = ?');
-      $stmt->execute(array($password, $previous_username));
+      $stmt->execute(array(password_hash($password, PASSWORD_DEFAULT, $options) , $previous_username));
       $stmt = $db->prepare('UPDATE users SET username = ? WHERE username = ?');
       $stmt->execute(array($username, $previous_username));
       $user = getUser($username);

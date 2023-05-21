@@ -1,0 +1,1 @@
+<script src = "../java_script/main_page.js"></script>

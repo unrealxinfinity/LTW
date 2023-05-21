@@ -3,7 +3,17 @@ include_once("../database/startup.php");
 include_once("../database/tickets.php");
 include_once("../database/user.php");
 
+if(!isset($_SESSION['id']) || $_SESSION['role'] == "Client"){
+    header("Location:../start.php");
+}
+
+
+
 $ticket = get_ticket($_GET['ticket_id']);
+
+if($ticket[0]['assignedAgentID'] != $_SESSION['id'] && $_SESSION['role'] == "Agent" && $ticket[0]['assignedAgentID'] != 1){
+    header("Location:../Boot/main_page_agent.php");
+}
 $user;
 if($_SESSION['role'] == "Agent" || $_SESSION['role'] == "Admin"){
     $user = get_user_by_id($ticket[0]['clientID']);
@@ -41,7 +51,7 @@ else if($_SESSION['role']=="Client"){
             </header>
             <div class = "tag_list">
                 <ul id = "deletable_list">
-                    <?php include_once("../Edit/get_ticket_hashtags.php");?>
+                    <?php include_once("../Edit_Actions/get_ticket_hashtags.php");?>
                 </ul>
             </div>
             <div id = "add_form">
@@ -59,31 +69,31 @@ else if($_SESSION['role']=="Client"){
                     </div>
                 </form>
             </div>
-            <form action = "../Edit/update_ticket_info.php" method = "post" class = "edit_typing_zone">
+            <form action = "../Edit_Actions/update_ticket_info.php" method = "post" class = "edit_typing_zone">
                 <div class = "ticket_control">
                     <label for = "departmentName">Department</label>
                     <select name = "departmentName" class = "department_selector">
-                        <?php include_once("../Edit/find_department.php"); ?>
+                        <?php include_once("../Edit_Actions/find_department.php"); ?>
                     </select>
                 </div>
                 <div class = "ticket_control">
                     <label for = "assignedAgent">Assigned Agent</label>
                     <select name = "assignedAgent" class = "department_selector">
-                        <?php include_once("../Edit/find_assigned_agent.php"); ?>
+                        <?php include_once("../Edit_Actions/find_assigned_agent.php"); ?>
                     </select>
                 </div>
                 <div class = "ticket_control">
                     <label for = "status">Status</label>
                     <select name = "status" class = "department_selector">
                         <option value = ""></option>
-                        <?php include_once("../Edit/find_status.php"); ?>
+                        <?php include_once("../Edit_Actions/find_status.php"); ?>
                     </select>
                 </div>
                 <div class = "ticket_control">
                     <label for = "priority">Priority</label>
                     <select name = "priority" class = "department_selector">
                         <option value = ""></option>
-                        <?php include_once("../Edit/find_priority.php"); ?>
+                        <?php include_once("../Edit_Actions/find_priority.php"); ?>
                     </select>
                 </div>
                 <div class = "ticket_control">

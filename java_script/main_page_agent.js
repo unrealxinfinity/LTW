@@ -54,45 +54,31 @@ const hashtag_input = document.getElementById("hashtag_search_input");
 
 const hashtag_list = document.querySelector("#browse form .ticket_control ul");
 
+let hashtag_list_elements = document.querySelectorAll("#browse form .ticket_control ul li");
 
 
-var final_hashtag = '';
-
-function get_best_hashtag(){
-    if(hashtag_input.value != ''){
-
-        let req = new XMLHttpRequest();
-
-            
-        req.open("POST", "../Submition/get_best_hashtag.php", true);
-
-        req.onload = () =>{
-            if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
-                if(hashtag_input.value != '')hashtag_input.value = data;
-
-                
-                    
-                    
 
 
-            }
-        }
-        let form_info = new FormData(search_ticket_form);
-        req.send(form_info);
-    }
-    else{
-        hashtag_input.value = '';
-    }
+function add_listener(){
+    hashtag_list_elements.forEach(input =>{
+        console.log(input);
+        input.addEventListener("click", ()=>{
+            console.log(input.innerHTML);
+            hashtag_input.value = input.innerHTML;
+            hashtag_list.innerHTML = '';
+        });
+    });
 }
 
 
-search_ticket_form.onsubmit = (e)=>{
+
+
+
+
+
+search_ticket_form.addEventListener('submit', (e)=>{
     e.preventDefault();
-    get_best_hashtag();
-    hashtag_list.innerHTML = '';
-    final_hashtag = hashtag_input.value;
-}
+});
 
 
 
@@ -101,19 +87,20 @@ search_ticket_form.onsubmit = (e)=>{
 hashtag_input.addEventListener("keyup", (e)=>{
 
 
-    if(hashtag_input.value != '' && final_hashtag != hashtag_input.value){
+    if(hashtag_input.value != ''){
 
         let req = new XMLHttpRequest();
 
             
-        req.open("POST", "../Submition/get_hashtags.php", true);
+        req.open("POST", "../Actions/get_hashtags.php", true);
 
         req.onload = () =>{
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
-                if(hashtag_input.value != '' && final_hashtag != hashtag_input.value){
+                const data = req.response;
+                if(hashtag_input.value != ''){
                     hashtag_list.innerHTML = data;
-                    final_hashtag = '';
+                    hashtag_list_elements = document.querySelectorAll("#browse form .ticket_control ul li");
+                    add_listener();
                 }
                 
                     
@@ -135,31 +122,12 @@ hashtag_input.addEventListener("keyup", (e)=>{
 
 
 
-show_assigned_ticket_button.onsubmit = (e)=>{
+show_assigned_ticket_button.addEventListener('submit', (e)=>{
     e.preventDefault();
-};
+});
 
 
-/*search_ticket_button.onclick = () =>{
-    let req = new XMLHttpRequest();
 
-    
-    req.open("POST", "../Submition/get_filtered_tickets.php", true);
-
-    req.onload = () =>{
-        if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-            let data = req.response;
-            ticket_box.innerHTML = "";
-            
-            
-
-            console.log(data);
-
-        }
-    }
-    //let form_info = new FormData(search_ticket_form);
-    req.send();
-}*/
 
 
 
@@ -168,11 +136,11 @@ setInterval(()=>{
     let req = new XMLHttpRequest();
 
         
-    req.open("POST", "../Submition/get_filtered_tickets.php", true);
+    req.open("POST", "../Actions/get_filtered_tickets.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-            let data = req.response;
+            const data = req.response;
             ticket_box.innerHTML = data;
 
             
@@ -187,16 +155,16 @@ setInterval(()=>{
 
 }, 800);
 
-show_assigned_ticket_button.onclick = () =>{
+show_assigned_ticket_button.addEventListener('click', () =>{
     if(show_assigned_ticket_button.classList.contains("pressed")){
         let req = new XMLHttpRequest();
 
             
-        req.open("POST", "../Submition/get_all_assigned_tickets.php", true);
+        req.open("POST", "../Actions/get_all_assigned_tickets.php", true);
 
         req.onload = () =>{
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
+                const data = req.response;
                 ticket_box_assigned.innerHTML = data;
                 show_assigned_ticket_button.classList.remove("pressed");
                 show_assigned_ticket_button.value = "Hide";
@@ -214,18 +182,18 @@ show_assigned_ticket_button.onclick = () =>{
         ticket_box_assigned.innerHTML = '';
         show_assigned_ticket_button.value = "Show";
     }
-}
+});
 
 setInterval(()=>{
     if(!show_assigned_ticket_button.classList.contains("pressed")){
         let req = new XMLHttpRequest();
 
         
-        req.open("POST", "../Submition/get_all_assigned_tickets.php", true);
+        req.open("POST", "../Actions/get_all_assigned_tickets.php", true);
 
         req.onload = () =>{
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
+                const data = req.response;
                 if(!show_assigned_ticket_button.classList.contains("pressed"))ticket_box_assigned.innerHTML = data;
                 
                 
@@ -259,6 +227,13 @@ function on_click_collapsible(){
 }
 on_click_collapsible();
 
+
+function encodeForAjax(data) {
+    return Object.keys(data).map(function(k){
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+    }).join('&')
+  }
+
 const FAQ_button = document.getElementById('FAQsubmit');
 const FAQForm = document.querySelector('.formFlex form');
 const popupHTML = document.getElementById('popMessage');
@@ -267,16 +242,16 @@ const identifier='<div class="popup"><span class="popuptext" id="myPopup">Questi
 questions = document.getElementsByClassName('collapsible');
 delete_FAQ_buttons = document.getElementsByClassName('material-icons');
 
-FAQForm.onsubmit=(e)=>{
+FAQForm.addEventListener('submit', (e)=>{
     e.preventDefault();
-}
-FAQ_button.onclick=()=>{
+});
+FAQ_button.addEventListener('click', ()=>{
     let req = new XMLHttpRequest();
-    req.open("POST","../Submition/insert_faq.php",true);
+    req.open("POST","../Actions/insert_faq.php",true);
     let form_info = new FormData(FAQForm);
     req.onload = ()=>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-            let data = req.response;
+            const data = req.response;
             if(data == identifier){
                 popupHTML.innerHTML = data;
                  setTimeout(() => {
@@ -294,18 +269,21 @@ FAQ_button.onclick=()=>{
         }
     }
     req.send(form_info);
-}
+});
 
 function DeleteFAQ(index){
     return function(event) {
         event.stopPropagation(); 
         let req = new XMLHttpRequest();
 
-       req.open("POST","../Submition/delete_faq.php",true);
+       req.open("POST","../Actions/delete_faq.php",true);
+
+
+       req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         var questionwExtraLetters = questions[index].textContent;
         var question=questionwExtraLetters.slice(0,-6);
         req.onload = ()=>{
-            let data = req.response;
+            const data = req.response;
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
                 faqs_pos.innerHTML=data;
                 delete_FAQ_buttons = document.getElementsByClassName('material-icons');
@@ -315,9 +293,9 @@ function DeleteFAQ(index){
             }
        
         };
-        var post_item = "question="+encodeURIComponent(question);
-        req.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-        req.send(post_item);
+
+
+        req.send(encodeForAjax({question: question}));
     }
 }
 function detect_buttons(){

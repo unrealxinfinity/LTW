@@ -22,19 +22,19 @@ message_box.onmouseleave = ()=>{
 
 hidden_id.value = ticket_id;
 
-form.onsubmit = (e) =>{
+form.addEventListener('submit', (e) =>{
     e.preventDefault();
-}
+});
 
-send_button.onclick = ()=>{
+send_button.addEventListener('click', ()=>{
     let req = new XMLHttpRequest();
 
     
-    req.open("POST", "../Submition/send_message.php", true);
+    req.open("POST", "../Actions/send_message.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-            let data = req.response;
+            const data = req.response;
             message_value.value = '';
             
 
@@ -43,7 +43,7 @@ send_button.onclick = ()=>{
     }
     let form_info = new FormData(form);
     req.send(form_info);
-}
+});
 
 
 
@@ -51,11 +51,11 @@ setInterval(() =>{
     let req = new XMLHttpRequest();
 
     
-    req.open("POST", "../Submition/get_messages.php", true);
+    req.open("POST", "../Actions/get_messages.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-            let data = req.response;
+            const data = req.response;
 
             message_box.innerHTML = data;
             if(!message_box.classList.contains("active")){
@@ -77,10 +77,9 @@ function scroll_bottom(){
 
 const back_arrow = document.querySelector(".wrapper .back_arrow");
 
-console.log(back_arrow);
 
 back_arrow.addEventListener("click", ()=>{
-    window.location.replace("../Boot/main_page.php");
+    window.location.replace("../Boot/change_to_role.php");
 });
 //Quick Answers section
 quickAnswersSection = document.getElementById('FAQDropUpContent');
@@ -89,17 +88,17 @@ quickAnswerButton = document.getElementById('FAQDropUpButton');
 function show_quick_answers(){
 
     let req = new XMLHttpRequest();
-    req.open ("POST","../Submition/get_quick_answers.php",true);
+    req.open ("POST","../Actions/get_quick_answers.php",true);
     req.onload = ()=>{
     if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-        let data = req.response;
+        const data = req.response;
         quickAnswersSection.innerHTML=data;
     }
 };
 req.send();
 }
 
-quickAnswerButton.onclick = ()=>{
+quickAnswerButton.addEventListener('click', ()=>{
     quickAnswerButton.classList.toggle("active");
     if(quickAnswerButton.classList.contains('active')){
         quickAnswers = document.getElementsByClassName('QuickAnswers');
@@ -111,22 +110,23 @@ quickAnswerButton.onclick = ()=>{
     }
     
     
-}
+});
 
 function detect_quick_answers(){
     if(quickAnswerButton.classList.contains('active')){
         setTimeout(() => {
             let quickAnswers = document.getElementsByClassName('AnswerContainer');
+            
+
             for(var i = 0; i<quickAnswers.length;i++){
                 (function(index) {
-
                     quickAnswers[index].onclick = () => {
                        const quickMessageToSend= quickAnswers[index].textContent;
                        document.getElementById("message_val").value=quickMessageToSend;
                     };
                   })(i);
                 }
-            }, 100); 
+            }, 500); 
     }
    
 }

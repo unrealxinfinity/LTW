@@ -3,7 +3,16 @@ include_once("../database/startup.php");
 include_once("../database/tickets.php");
 include_once("../database/user.php");
 
+if(!isset($_SESSION['id']) || $_SESSION['role'] == "Client"){
+    header("Location:../start.php");
+}
+
 $ticket = get_ticket($_GET['ticket_id']);
+
+if($ticket[0]['assignedAgentID'] != $_SESSION['id'] && $_SESSION['role'] == "Agent" && $ticket[0]['assignedAgentID'] != 1){
+    header("Location:../Boot/main_page_agent.php");
+}
+
 $user;
 if($_SESSION['role'] == "Agent" || $_SESSION['role'] == "Admin"){
     $user = get_user_by_id($ticket[0]['clientID']);
@@ -40,7 +49,7 @@ else if($_SESSION['role']=="Client"){
                 
             </header>
             <div class = "history_box">
-                <?php include_once("../History/get_ticket_history.php");?>
+                <?php include_once("../History_Actions/get_ticket_history.php");?>
             </div>
             
         </section>

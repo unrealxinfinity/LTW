@@ -29,21 +29,26 @@ const deletable_list = document.getElementById("deletable_list");
 
 const title = document.querySelector("header .ticket-box p");
 
+function encodeForAjax(data) {
+    return Object.keys(data).map(function(k){
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+    }).join('&')
+  }
 
-console.log(deletable_hashtags);
 
 
-add_form.onsubmit = (e)=>{
+
+add_form.addEventListener('submit', (e)=>{
     e.preventDefault();
-}
+});
 
 function delete_hashtag_listen(){
 
     deletable_hashtags.forEach(input =>{
-        input.onclick = (e)=>{
+        input.addEventListener('click', (e)=>{
             e.preventDefault();
             let req = new XMLHttpRequest();
-            req.open("POST", "../Edit/remove_hashtag.php", true);
+            req.open("POST", "../Edit_Actions/remove_hashtag.php", true);
 
             req.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
 
@@ -52,18 +57,17 @@ function delete_hashtag_listen(){
             
 
             if (req.readyState === XMLHttpRequest.DONE && req.status === 200) {
-                let data = req.response;
+                const data = req.response;
                 title.innerHTML = data;
                 input.classList.toggle("eliminate");
             }
             };
-            let temp = "hashtagName="
-            let res = temp.concat(input.value);
-            temp = "&ticket_id=";
-            let super_res = temp.concat(ticket_id);
-            let final = res.concat(super_res);
-            req.send(final);
-        }
+
+
+            req.send(encodeForAjax({hashtagName: input.value, ticket_id: ticket_id}));
+
+
+        });
     });
 }
 
@@ -72,11 +76,11 @@ function get_delatable_hashtags(){
     let req = new XMLHttpRequest();
 
             
-    req.open("POST", "../Edit/get_deletable_hashtags.php", true);
+    req.open("POST", "../Edit_Actions/get_deletable_hashtags.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
+                const data = req.response;
                 deletable_list.innerHTML = data;
                 deletable_hashtags = document.querySelectorAll("#deletable_list input");
                 delete_hashtag_listen();
@@ -94,17 +98,17 @@ function get_delatable_hashtags(){
     req.send(form_info);
 }
 
-add_button.onclick = ()=>{
+add_button.addEventListener('click', ()=>{
     let req = new XMLHttpRequest();
 
             
-    req.open("POST", "../Edit/add_hashtag.php", true);
+    req.open("POST", "../Edit_Actions/add_hashtag.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
                 hashtag_input.value = '';
                 hashtag_list.innerHTML = '';
-                let data = req.response;
+                const data = req.response;
                 title.innerHTML = data;
                 get_delatable_hashtags();
                 
@@ -118,7 +122,7 @@ add_button.onclick = ()=>{
     }
     let form_info = new FormData(add_form);
     req.send(form_info);
-}
+});
 
 
 
@@ -143,11 +147,11 @@ hidden_ticket_id_add.value = ticket_id;
 
 
 
-edit_button.onclick = ()=>{
+edit_button.addEventListener('click', ()=>{
     let req = new XMLHttpRequest();
 
             
-    req.open("POST", "../Edit/update_ticket_info.php", true);
+    req.open("POST", "../Edit_Actions/update_ticket_info.php", true);
 
     req.onload = () =>{
         if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
@@ -161,7 +165,7 @@ edit_button.onclick = ()=>{
     }
     let form_info = new FormData(form);
     req.send(form_info);
-}
+});
 
 hashtag_input.addEventListener("keyup", (e)=>{
     if(hashtag_input.value != ''){
@@ -171,11 +175,11 @@ hashtag_input.addEventListener("keyup", (e)=>{
         let req = new XMLHttpRequest();
 
             
-        req.open("POST", "../Submition/get_hashtags.php", true);
+        req.open("POST", "../Actions/get_hashtags.php", true);
 
         req.onload = () =>{
             if(req.readyState === XMLHttpRequest.DONE && req.status === 200){
-                let data = req.response;
+                const data = req.response;
                 if(hashtag_input.value != ''){
                     hashtag_list.innerHTML = data;
                     addable_hashtags = document.querySelectorAll("#add_form form ul li");
@@ -200,7 +204,7 @@ const back_arrow = document.querySelector(".wrapper .back_arrow");
 
 
 back_arrow.addEventListener("click", ()=>{
-    window.location.replace("../Boot/main_page.php");
+    window.location.replace("../Boot/change_to_role.php");
 });
 
 

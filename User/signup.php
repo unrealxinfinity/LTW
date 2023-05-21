@@ -16,7 +16,7 @@
     <section>
         <div class="register_content">
             <h1>Sign up</h1>
-            <form action="../Submition/sign_up.php" method="post" class="register_form" id = "register_form">
+            <form action="../Actions/sign_up.php" method="post" class="register_form" id = "register_form">
                 <div class = "control">
                     <label for = "username">Username</label>
                     <input name="username" id = "username" type="text" placeholder="Username">

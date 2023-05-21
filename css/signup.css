@@ -118,3 +118,11 @@ h1{
         transform: rotate(0deg);
     }
 }
+
+
+@media only screen and (max-width: 1200px){
+    .back{
+        display:none;
+    }
+    
+}

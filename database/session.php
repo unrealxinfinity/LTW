@@ -7,6 +7,7 @@
         $_SESSION['email'] = $username['email'];
         $_SESSION['password'] = $username['password'];
         $_SESSION['name'] = $username['name'];
+        $_SESSION['csrf'] = generate_random_token();
    }
 
    function getUsername() {
