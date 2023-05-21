@@ -15,7 +15,7 @@
     </div>
     <section>
         <div class="register_content">
-            <h1>Sign in</h1>
+            <h1>Sign up</h1>
             <form action="../Submition/sign_up.php" method="post" class="register_form" id = "register_form">
                 <div class = "control">
                     <label for = "username">Username</label>
