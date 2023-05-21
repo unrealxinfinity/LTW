@@ -1,7 +1,7 @@
 # Brief summary
 ### This website was developed in the class of LTW2022/2023
 - The goal was to develop a website capable of ticket exchange and management between different users in order to solve problems issued by the them.
-- Project made by Joao Miguei Vieira Cardoso (up202108732), Isabel Maria Lima Coutinho (up202108767), HaoChang Fu (up202108730).
+- Project made by Joao Miguel Vieira Cardoso (up202108732), Isabel Maria Lima Coutinho (up202108767), HaoChang Fu (up202108730).
 
 # Project
 ## NightSolve 
