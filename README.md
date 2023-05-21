@@ -14,7 +14,7 @@
   - - [x] **Ticket status**: Users can check their ticket statuses;  
   - - [x] **Messaging**: Each ticket has the ability to let 2 people exchange messages in order to solve a problem raised by the requester;
   - - [x] **Adding tags**: User can add tags to their ticket so other people who wants to answer can see their ticket by checking a tag.
-- [X] [**FAQs**](#manage-faqs): Allows users to check most asked questions so they don't have to waste time issuing a ticket;
+- [X] [**FAQs**](#faqs): Allows users to check most asked questions so they don't have to waste time issuing a ticket;
 ### Specific features (specific to the priviledges of each user):
 ### Associated to Agent:
 - [x] [**Viewing the tickets**](#viewing-the-tickets): Agents can view and filter the tickets they want to be assigned with;
@@ -28,7 +28,7 @@
   - - [x] **Change status of a ticket**: Agents can change the status of aticket from opem -> assigned -> closed; 
   - - [x] **Edit ticket hashtags**: Agents can add or remove hashtags from a ticket;
   - - [x] **Ticket history**: Agents can check changes done to a ticket in the ticket history;
-- [x] [**Manage FAQs**](#manage-faqs): Agents can add and remove FAQs of the website;
+- [x] [**Manage FAQs**](#faqs): Agents can add and remove FAQs of the website;
 
 ### Associated to Admin:
 - [x] [**Upgrade a user's priviledge**](#upgrade-priviledge);
