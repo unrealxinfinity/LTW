@@ -154,7 +154,9 @@ INSERT INTO priorities (priorityName) VALUES ('medium');
 INSERT INTO priorities (priorityName) VALUES ('high');
 INSERT INTO priorities (priorityName) VALUES ('highest');
 
-INSERT INTO faqs (question,answer) VALUES ('Como fazer ltw','Nao sei');
+INSERT INTO faqs (question,answer) VALUES ('How to edit my profile?','By going through Edit Profile section, you can edit your profile by filling the asked form.');
+INSERT INTO faqs (question,answer) VALUES ('How to submit a ticket?','At the section Submit, you can create a ticket visible for all Agents and admins by filling the required form.');
+
 
 --INSERT INTO messages (ID, text, ticketID, userID, agentID) VALUES(1, 'Hello this is a response', 4, 2, 3);
 
